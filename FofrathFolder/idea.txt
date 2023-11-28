@@ -1,0 +1,18 @@
+very original Idea:
+
+card based city builder / survival builder ((pain))
+
+Singleplayer game, you buy card packs for aditional cards, 4each card pack offers a different set of cards with each a different function, cards in pack are randomized - for gambling addiction... replayability*
+Goal is to keep your village alive, because you don't want it to die... right?
+Highscore list (for competition and addiction -- monkey see big number, dopamine released)
+card limit - yes. (no) //expandible through upgrades/buildings (for pain)
+
+add z to things for swaws and originality.
+
+many classes for GUI
+dynamic classes for Stacks and more stacks because stacks in list
+
+Every tile a (dynamic array list) stack
+MAKE MOUSE A STACK (for moving more than one card at a time)
+
+tile based (for ocd (and autism))

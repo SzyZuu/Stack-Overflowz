@@ -1,0 +1,4 @@
+1. Week:
+ - Window base
+ - Game thread
+ - high quality idea text
