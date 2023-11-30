@@ -1,5 +1,6 @@
 package main;
 
+import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
@@ -21,5 +22,9 @@ public class KeyHandler implements KeyListener {
     @Override
     public void keyReleased(KeyEvent e) {
 
+    }
+
+    public static Point getMousePos(){
+        return MouseInfo.getPointerInfo().getLocation();
     }
 }

@@ -1,5 +1,7 @@
 package main;
 
+import entity.Card;
+
 import javax.swing.*;
 import java.awt.*;
 
@@ -12,21 +14,23 @@ public class GamePanel extends JPanel implements Runnable{
     final int baseTileSize = 32; // Tile site 32x32
     final int scale = 2; // Scaling (tiles appear larger)
 
-    final int tileSize = baseTileSize * scale; // size of tile on screen 64x64
+    public final int tileSize = baseTileSize * scale; // size of tile on screen 64x64
 
-    final int maxScreenColums = 16; // Grid Size Horizontal
+    final int maxScreenColumns = 16; // Grid Size Horizontal
     final int maxScreenRows = 12;   //Grid Size Vertical
 
-    final int screenWidth = maxScreenColums * tileSize; // 1024 Px
+    final int screenWidth = maxScreenColumns * tileSize; // 1024 Px
     final int screenHeight = maxScreenRows * tileSize;  // 768 Px
 
     //FPS
     int FPS = 60;
-
+    KeyHandler keyH = new KeyHandler();
 
     Thread gameThread;
 
-    KeyHandler keyH = new KeyHandler();
+    Card card = new Card(this, keyH);
+
+
 
     public GamePanel() {
         this.setPreferredSize(new Dimension(screenWidth, screenHeight));
@@ -61,11 +65,26 @@ public class GamePanel extends JPanel implements Runnable{
             // 2 DRAW: draw the screen with the updated screen information
             repaint();
 
+            try {
+                double remainingTime = nextDrawTime - System.nanoTime();
+                remainingTime = remainingTime / 1000000;
+
+                if (remainingTime < 0){                         //prevent unnecessary wait if too slow
+                    remainingTime = 0;
+                }
+
+                Thread.sleep((long) remainingTime);
+
+                nextDrawTime += drawInterval;
+
+            } catch (InterruptedException e) {
+                throw new RuntimeException(e);
+            }
 
         }
     }
     public void update(){
-
+        card.update();
     }
 
     public void paintComponent(Graphics g){
@@ -74,9 +93,7 @@ public class GamePanel extends JPanel implements Runnable{
 
         Graphics2D g2 = (Graphics2D)g;      //ensures that the graphics are 2d
 
-        g2.setColor(Color.white);
-
-        g2.fillRect(100, 100, tileSize, tileSize);
+        card.draw(g2);
 
         //g2.drawString("fortnite", screenWidth /2 - 10, screenHeight/ 2 - 3);      // secret :D
 
