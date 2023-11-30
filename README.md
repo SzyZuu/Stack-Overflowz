@@ -1,4 +1,6 @@
 # Stack-Overflowz
 IT card game project
 
-don't, just leave
+thats it, just leave
+
+bye bye
