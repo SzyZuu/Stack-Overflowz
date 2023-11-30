@@ -11,7 +11,7 @@ import java.awt.*;
 public class GamePanel extends JPanel implements Runnable{
 
     // Screenz Settingz
-    final int baseTileSize = 32; // Tile site 32x32
+    final int baseTileSize = 32; // Tile size 32x32
     final int scale = 2; // Scaling (tiles appear larger)
 
     public final int tileSize = baseTileSize * scale; // size of tile on screen 64x64
