@@ -1,4 +1,4 @@
-![yes](https://img.shields.io/badge/I_like-balls-blue)
+![yes](https://img.shields.io/badge/I_like-Tea-blue)
 
 ![yesagain](https://img.shields.io/badge/Best_Project-2023-green)
 
