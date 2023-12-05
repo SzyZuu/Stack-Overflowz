@@ -25,10 +25,11 @@ public class GamePanel extends JPanel implements Runnable{
     //FPS
     int FPS = 60;
     KeyHandler keyH = new KeyHandler();
+    MouseHandler mouseH = new MouseHandler();
 
     Thread gameThread;
 
-    Card card = new Card(this, keyH);
+    Card card = new Card(this, keyH, mouseH);
 
 
 
@@ -38,6 +39,7 @@ public class GamePanel extends JPanel implements Runnable{
         this.setDoubleBuffered(true);       // improves rendering performance
         this.addKeyListener(keyH);
         this.setFocusable(true);
+        this.addMouseListener(mouseH);
     }
 
     public void startGameThread() {
@@ -56,7 +58,7 @@ public class GamePanel extends JPanel implements Runnable{
         while (gameThread != null){
 
             long currentTime = System.nanoTime();
-            System.out.println("current time" + currentTime);
+            //System.out.println("current time" + currentTime);
 
 
             //System.out.println("its on, trust me"); // confirmation that the game is running, for safety purposes

@@ -13,12 +13,13 @@ public class Main {
         GamePanel gamePanel = new GamePanel();
         window.add(gamePanel);
 
-        window.pack(); // cuases windo to be preffered size and layout
+        window.pack(); // causes window to be preferred size and layout
 
         window.setLocationRelativeTo(null);
+        //window.setExtendedState(JFrame.MAXIMIZED_BOTH);       for full screen
+        //window.setUndecorated(true);
         window.setVisible(true);
 
         gamePanel.startGameThread();
-
     }
 }

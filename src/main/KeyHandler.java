@@ -24,7 +24,5 @@ public class KeyHandler implements KeyListener {
 
     }
 
-    public static Point getMousePos(){
-        return MouseInfo.getPointerInfo().getLocation();
-    }
+
 }

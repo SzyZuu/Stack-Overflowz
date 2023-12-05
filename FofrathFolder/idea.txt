@@ -16,3 +16,8 @@ Every tile a (dynamic array list) stack
 MAKE MOUSE A STACK (for moving more than one card at a time)
 
 tile based (for ocd (and autism))
+
+
+
+temp todo list because less files:
+- use (maybe) scenebuilder for game menus + panels
