@@ -5,6 +5,7 @@ import main.KeyHandler;
 import main.MouseHandler;
 
 import java.awt.*;
+import java.awt.event.MouseEvent;
 
 public class Card extends Entity {
 
@@ -24,6 +25,7 @@ public class Card extends Entity {
     }
     public void update(){
         //System.out.println(mouseH.getMousePos());
+
     }
     public void draw(Graphics2D g2){
         g2.setColor(Color.white);
