@@ -19,5 +19,9 @@ tile based (for ocd (and autism))
 
 
 
-temp todo list because fewer files:
+todo list because fewer files:
 - use (maybe) scenebuilder for game menus + panels
+- collisons to prevent out of bounds crash
+- use json for  easy creation of new cards
+- install IJ on laptops for working in the Holidays (the grind is real, fofrath pls give good grade we sacrificed our free time for this)
+- create (maybe) new class for card abilities? else yoink them all into card class (more chaos = gud; Khorne approved )

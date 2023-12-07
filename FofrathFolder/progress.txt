@@ -11,3 +11,7 @@
  5.12.23
  - mouseHandler
  - set up simultaneous working aka github
+ 7.12.23
+ - card mouse movement (actually crazy shit)
+ - figured out how to use getMousePos (and points overall)
+ - flexxxed to Herr Fofrath
