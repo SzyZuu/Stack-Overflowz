@@ -25,3 +25,4 @@ todo list because fewer files:
 - use json for  easy creation of new cards
 - install IJ on laptops for working in the Holidays (the grind is real, fofrath pls give good grade we sacrificed our free time for this)
 - create (maybe) new class for card abilities? else yoink them all into card class (more chaos = gud; Khorne approved )
+- add offset only after clicking, so the movement is smoother + so faster movement is possible 
