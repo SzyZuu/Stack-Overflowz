@@ -29,7 +29,7 @@ public class GamePanel extends JPanel implements Runnable{
 
     Thread gameThread;
 
-    Card card = new Card(this, keyH, mouseH);
+    Card card = new Card(this, keyH, mouseH, grid);
 
 
 

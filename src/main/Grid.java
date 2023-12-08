@@ -4,10 +4,18 @@ import java.awt.*;
 
 //temp for testing, might become permanent// currently doesnt work
 //todo fix my spaghetti code
-public class Grid  extends GamePanel{
-    Point arrayPosition;
-    Point tileCornerTL; // top left
-    Point tileCornerBR; // bottom right
+public class Grid  {
+
+    int tileCornerTLy; // top left
+    int tileCornerTLx; // top left
+    int tileCornerBRy; // bottom right
+    int tileCornerBRx; // bottom right
+
+    GamePanel gp;
+
+    public Grid(GamePanel gamp){
+        this.gp = gamp;
+    }
 
     public Point currentNearestGrid(){
 
@@ -22,12 +30,12 @@ public class Grid  extends GamePanel{
                     currentNearestGrid().x= i;
                     currentNearestGrid().y = j;
 
-                    return(currentNearestGrid());
+                    return gridPoint;
                 }
             }
         }
-        if(currentNearestGrid() != null){
-            return (currentNearestGrid());
+        if(gridPoint != null){
+            return gridPoint;
         }
         else{
             return null;
