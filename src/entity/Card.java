@@ -1,6 +1,7 @@
 package entity;
 
 import main.GamePanel;
+import main.Grid;
 import main.KeyHandler;
 import main.MouseHandler;
 
@@ -12,6 +13,7 @@ public class Card extends Entity {
     GamePanel gp;
     KeyHandler keyH;
     MouseHandler mouseH;
+    Grid g;
 
     boolean isPickedUp = false;
     int offset = 32; //Math.round(gp.tileSize/2);
@@ -51,8 +53,8 @@ public class Card extends Entity {
     }
     public void update(){
         pickUp();
-        System.out.println(gp.getMousePosition());
-        System.out.println(pos);
+        //System.out.println(gp.getMousePosition());
+        //System.out.println(pos);
 
     }
     public void draw(Graphics2D g2){
