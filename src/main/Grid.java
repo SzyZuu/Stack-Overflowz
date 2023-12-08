@@ -19,16 +19,18 @@ public class Grid  {
 
     public Point currentNearestGrid(){
 
-        for (int i = 16; i >= 1 ; i--) {
-            tileCornerTL.x = screenWidth - tileSize * i;
-            tileCornerBR.x = tileCornerTL.x + tileSize;
-            for (int j = 12; j >= 1; j--){
-                tileCornerTL.y = screenHeight - tileSize * j;
-                tileCornerBR.y = tileCornerTL.y + tileSize;
+        Point gridPoint = new Point();
 
-                if(getMousePosition().x >= tileCornerTL.x && getMousePosition().x <= tileCornerBR.x && getMousePosition().y >= tileCornerTL.y && getMousePosition().y <= tileCornerBR.y){
-                    currentNearestGrid().x= i;
-                    currentNearestGrid().y = j;
+        for (int i = 16; i >= 1 ; i--) {
+            tileCornerTLx = gp.screenWidth - gp.tileSize * i;
+            tileCornerBRx = tileCornerTLx + gp.tileSize;
+            for (int j = 12; j >= 1; j--){
+                tileCornerTLy = gp.screenHeight - gp.tileSize * j;
+                tileCornerBRy = tileCornerTLy + gp.tileSize;
+
+                if(gp.getMousePosition().x >= tileCornerTLx && gp.getMousePosition().x <= tileCornerBRx && gp.getMousePosition().y >= tileCornerTLy && gp.getMousePosition().y <= tileCornerBRy){
+                    gridPoint.x= i;
+                    gridPoint.y = j;
 
                     return gridPoint;
                 }

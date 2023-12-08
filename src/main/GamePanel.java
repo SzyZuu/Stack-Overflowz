@@ -26,6 +26,7 @@ public class GamePanel extends JPanel implements Runnable{
     int FPS = 60;
     KeyHandler keyH = new KeyHandler();
     MouseHandler mouseH = new MouseHandler();
+    Grid grid = new Grid(this);
 
     Thread gameThread;
 

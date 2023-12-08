@@ -13,15 +13,16 @@ public class Card extends Entity {
     GamePanel gp;
     KeyHandler keyH;
     MouseHandler mouseH;
-    Grid g;
+    Grid grid;
 
     boolean isPickedUp = false;
     int offset = 32; //Math.round(gp.tileSize/2);
 
-    public Card(GamePanel gp, KeyHandler keyH, MouseHandler mouseH){
+    public Card(GamePanel gp, KeyHandler keyH, MouseHandler mouseH, Grid g){
         this.gp = gp;
         this.keyH = keyH;
         this.mouseH = mouseH;
+        this. grid = g;
         setDefaultValues();
     }
 
