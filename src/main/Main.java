@@ -11,6 +11,7 @@ public class Main {
         window.setTitle("Stack Overflowz");
 
         GamePanel gamePanel = new GamePanel();
+        Grid grid = new Grid(gamePanel);
         window.add(gamePanel);
 
         window.pack(); // causes window to be preferred size and layout
@@ -21,5 +22,6 @@ public class Main {
         window.setVisible(true);
 
         gamePanel.startGameThread();
+        grid.startGridThread();
     }
 }

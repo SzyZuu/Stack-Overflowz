@@ -55,7 +55,7 @@ public class Card extends Entity {
     public void update(){
         pickUp();
         //grid.currentNearestGrid();
-        //System.out.println();
+        //System.out.println("Grid nearest boi: " + grid.currentNearestGrid());
         //System.out.println(gp.getMousePosition());
         //System.out.println(pos);
 
