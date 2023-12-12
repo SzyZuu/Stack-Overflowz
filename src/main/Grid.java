@@ -29,37 +29,27 @@ public class Grid implements Runnable {
             for (int j = 12; j >= 1; j--){
                 tileCornerTLy = gp.screenHeight - gp.tileSize * j;
                 tileCornerBRy = tileCornerTLy + gp.tileSize;
-                /*
-                System.out.println("Tlx " + tileCornerTLx);
-                System.out.println("BRx " + tileCornerBRx);
-                System.out.println("TLy " + tileCornerTLy);
-                System.out.println("BRy " + tileCornerBRy);
-                */
-
-
                 if(gp.getMousePosition().x >= tileCornerTLx && gp.getMousePosition().x <= tileCornerBRx && gp.getMousePosition().y >= tileCornerTLy && gp.getMousePosition().y <= tileCornerBRy){
                     gridPoint.x= i;
                     gridPoint.y = j;
-
                     return gridPoint;
                 }
             }
         }
-        if(gridPoint == null){
             return gridPoint;
-        }
-        else{
-            return null;
-        }
     }
     public Point translate(){
         Point transPoint = new Point();
+        if(currentNearestGrid() != null ) {
+            transPoint.x = gp.maxScreenColumns - currentNearestGrid().x;
+            transPoint.y = gp.maxScreenRows - currentNearestGrid().y;
+            return transPoint;
 
-        transPoint.x = gp.maxScreenColumns - currentNearestGrid().x;
-        transPoint.y = gp.maxScreenRows - currentNearestGrid().y;
+        }
+        else {
+            return null;
+        }
 
-
-        return transPoint;
     }
 
     public void startGridThread(){
@@ -71,7 +61,8 @@ public class Grid implements Runnable {
     public void run() {
         while(gridThread != null){
             currentNearestGrid();
-            System.out.println(translate());
+            translate();
+            //System.out.println(translate());
         }
     }
 }

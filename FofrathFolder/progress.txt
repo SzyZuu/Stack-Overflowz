@@ -21,3 +21,5 @@
  - secondary thread works
  - considering complete redo of grid, since it crashes when the mouse is too fast
  - planned on how to fix the error when mouse leaves the screen
+ - third thread, doesnt work
+ - mouse too fast problem has been fixed, without complete redo

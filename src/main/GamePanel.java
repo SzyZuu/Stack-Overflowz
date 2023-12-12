@@ -32,7 +32,7 @@ public class GamePanel extends JPanel implements Runnable{
 
     Card card = new Card(this, keyH, mouseH, grid);
 
-
+    //MainThread mainThread = new MainThread( this, grid);
 
     public GamePanel() {
         this.setPreferredSize(new Dimension(screenWidth, screenHeight));
