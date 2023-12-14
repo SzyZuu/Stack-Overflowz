@@ -23,3 +23,7 @@
  - planned on how to fix the error when mouse leaves the screen
  - third thread, doesnt work
  - mouse too fast problem has been fixed, without complete redo
+ 14.12.23
+ - testing adding cards
+ - bug fixes for mouse and grid
+ - some work on grid snapping 
