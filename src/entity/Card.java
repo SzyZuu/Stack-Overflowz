@@ -34,17 +34,14 @@ public class Card extends Entity {
             pos.x = gp.getMousePosition().x - offset;
             pos.y = gp.getMousePosition().y - offset;
             //pos = gp.getMousePosition();
-            if(mouseH.pressed == false){
+            if(!mouseH.pressed){
                 isPickedUp = false;
             }
         }
     }
 
     public boolean isSelected(){
-        if(gp.getMousePosition().x >= pos.x && gp.getMousePosition().y >= pos.y && gp.getMousePosition().x <= pos.x + gp.tileSize && gp.getMousePosition().y <= pos.y + gp.tileSize ){
-            return true;
-        }
-        else return false;
+        return gp.getMousePosition().x >= pos.x && gp.getMousePosition().y >= pos.y && gp.getMousePosition().x <= pos.x + gp.tileSize && gp.getMousePosition().y <= pos.y + gp.tileSize;
     }
 
     public void setDefaultValues() {
