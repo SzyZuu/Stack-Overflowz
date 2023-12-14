@@ -58,4 +58,9 @@ public class Card extends Entity {
         g2.fillRect(pos.x, pos.y , gp.tileSize, gp.tileSize);
     }
 
+    public void testDraw(Graphics2D g2){
+        g2.setColor(Color.red);
+
+        g2.fillRect(pos.x, pos.y, gp.tileSize, gp.tileSize);
+    }
 }
