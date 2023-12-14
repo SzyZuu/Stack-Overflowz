@@ -29,14 +29,13 @@ public class Card extends Entity {
     public void pickUp(){
         if(mouseH.pressed && isSelected()){
             isPickedUp = true;
-
-            if(isPickedUp){
-                pos.x = gp.getMousePosition().x - offset;
-                pos.y = gp.getMousePosition().y - offset;
-                //pos = gp.getMousePosition();
-                if(mouseH.pressed == false){
-                    isPickedUp = false;
-                }
+        }
+        if(isPickedUp){
+            pos.x = gp.getMousePosition().x - offset;
+            pos.y = gp.getMousePosition().y - offset;
+            //pos = gp.getMousePosition();
+            if(mouseH.pressed == false){
+                isPickedUp = false;
             }
         }
     }
