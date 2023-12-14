@@ -31,6 +31,7 @@ public class GamePanel extends JPanel implements Runnable{
     Thread gameThread;
 
     Card card = new Card(this, keyH, mouseH, grid);
+    Card card2 = new Card(this, keyH, mouseH, grid);
 
     //MainThread mainThread = new MainThread( this, grid);
 
@@ -53,7 +54,6 @@ public class GamePanel extends JPanel implements Runnable{
 
         double drawInterval = 1000000000 / FPS ; // 0.0166 seconds
         double nextDrawTime = System.nanoTime() + drawInterval;
-
 
 
         while (gameThread != null){
@@ -88,6 +88,7 @@ public class GamePanel extends JPanel implements Runnable{
     }
     public void update(){
         card.update();
+        card2.update();
     }
 
     public void paintComponent(Graphics g){
@@ -97,6 +98,7 @@ public class GamePanel extends JPanel implements Runnable{
         Graphics2D g2 = (Graphics2D)g;      //ensures that the graphics are 2d
 
         card.draw(g2);
+        card2.draw(g2);
 
         //g2.drawString("fortnite", screenWidth /2 - 10, screenHeight/ 2 - 3);      // secret :D
 
