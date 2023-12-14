@@ -33,6 +33,7 @@ public class Card extends Entity {
             isPickedUp = true;
         }
         if(isPickedUp){
+            grid.clearGridArraySlot();
             pos.x = gp.getMousePosition().x - offset;
             pos.y = gp.getMousePosition().y - offset;
             if(!mouseH.pressed){
@@ -45,6 +46,7 @@ public class Card extends Entity {
     public void gridSnap(){
         pos.x = grid.translate().x * gp.tileSize;
         pos.y = grid.translate().y * gp.tileSize;
+        grid.setGridArray();
     }
 
 
