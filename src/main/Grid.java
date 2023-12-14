@@ -4,35 +4,65 @@ import java.awt.*;
 
 //temp for testing, might become permanent// currently doesnt work
 //todo fix my spaghetti code
-public class Grid  extends GamePanel{
-    Point arrayPosition;
-    Point tileCornerTL; // top left
-    Point tileCornerBR; // bottom right
+public class Grid implements Runnable {
+
+    int tileCornerTLy; // top left
+    int tileCornerTLx; // top left
+    int tileCornerBRy; // bottom right
+    int tileCornerBRx; // bottom right
+
+    GamePanel gp;
+
+    Thread gridThread;
+
+    public Grid(GamePanel gamp){
+        this.gp = gamp;
+    }
 
     public Point currentNearestGrid(){
 
+        Point gridPoint = new Point();
+
         for (int i = 16; i >= 1 ; i--) {
-            tileCornerTL.x = screenWidth - tileSize * i;
-            tileCornerBR.x = tileCornerTL.x + tileSize;
+            tileCornerTLx = gp.screenWidth - gp.tileSize * i;
+            tileCornerBRx = tileCornerTLx + gp.tileSize;
             for (int j = 12; j >= 1; j--){
-                tileCornerTL.y = screenHeight - tileSize * j;
-                tileCornerBR.y = tileCornerTL.y + tileSize;
-
-                if(getMousePosition().x >= tileCornerTL.x && getMousePosition().x <= tileCornerBR.x && getMousePosition().y >= tileCornerTL.y && getMousePosition().y <= tileCornerBR.y){
-                    currentNearestGrid().x= i;
-                    currentNearestGrid().y = j;
-
-                    return(currentNearestGrid());
+                tileCornerTLy = gp.screenHeight - gp.tileSize * j;
+                tileCornerBRy = tileCornerTLy + gp.tileSize;
+                if(gp.getMousePosition().x >= tileCornerTLx && gp.getMousePosition().x <= tileCornerBRx && gp.getMousePosition().y >= tileCornerTLy && gp.getMousePosition().y <= tileCornerBRy){
+                    gridPoint.x= i;
+                    gridPoint.y = j;
+                    return gridPoint;
                 }
             }
         }
-        if(currentNearestGrid() != null){
-            return (currentNearestGrid());
+            return gridPoint;
+    }
+    public Point translate(){
+        Point transPoint = new Point();
+        if(currentNearestGrid() != null ) {
+            transPoint.x = gp.maxScreenColumns - currentNearestGrid().x;
+            transPoint.y = gp.maxScreenRows - currentNearestGrid().y;
+            return transPoint;
+
         }
-        else{
+        else {
             return null;
         }
+
     }
 
+    public void startGridThread(){
+        gridThread = new Thread(this);
+        gridThread.start();
+    }
 
+    @Override
+    public void run() {
+        while(gridThread != null){
+            currentNearestGrid();
+            translate();
+            //System.out.println(translate());
+        }
+    }
 }

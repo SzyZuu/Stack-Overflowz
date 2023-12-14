@@ -11,15 +11,18 @@ public class Main {
         window.setTitle("Stack Overflowz");
 
         GamePanel gamePanel = new GamePanel();
+        Grid grid = new Grid(gamePanel);
+        MainThread mainThread = new MainThread(gamePanel, grid);
+
         window.add(gamePanel);
-
         window.pack(); // causes window to be preferred size and layout
-
         window.setLocationRelativeTo(null);
         //window.setExtendedState(JFrame.MAXIMIZED_BOTH);       for full screen
         //window.setUndecorated(true);
         window.setVisible(true);
 
+        //mainThread.startMainThread();
         gamePanel.startGameThread();
+        grid.startGridThread();
     }
 }
