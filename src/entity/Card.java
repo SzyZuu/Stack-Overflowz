@@ -5,6 +5,7 @@ import main.Grid;
 import main.KeyHandler;
 import main.MouseHandler;
 import java.awt.*;
+import java.util.Random;
 
 public class Card extends Entity {
     GamePanel gp;
@@ -16,6 +17,7 @@ public class Card extends Entity {
     //int offset = 32; //Math.round(gp.tileSize/2);
     float offsetMath;
     int offset;
+    Color color;
 
     public Card(GamePanel gp, KeyHandler keyH, MouseHandler mouseH, Grid g){
         this.gp = gp;
@@ -61,11 +63,20 @@ public class Card extends Entity {
         pos.x = 100;
         pos.y = 100;
     }
+
+    public void colorCard(){
+        Random rand = new Random();
+        float r = rand.nextFloat();
+        float g = rand.nextFloat();
+        float b = rand.nextFloat();
+        color = new Color(r, g, b);
+    }
+
     public void update(){
         pickUp();
     }
     public void draw(Graphics2D g2){
-        g2.setColor(Color.white);
+        g2.setColor(color);
 
         g2.fillRect(pos.x, pos.y , gp.tileSize, gp.tileSize);
     }
