@@ -5,6 +5,7 @@ import main.Grid;
 import main.KeyHandler;
 import main.MouseHandler;
 import java.awt.*;
+import java.util.Random;
 
 public class Card extends Entity {
     GamePanel gp;
@@ -16,6 +17,7 @@ public class Card extends Entity {
     //int offset = 32; //Math.round(gp.tileSize/2);
     float offsetMath;
     int offset;
+    Color color;
 
     public Card(GamePanel gp, KeyHandler keyH, MouseHandler mouseH, Grid g){
         this.gp = gp;
@@ -28,17 +30,24 @@ public class Card extends Entity {
     }
 
     public void pickUp(){
-        if(mouseH.pressed && isSelected()){
-            isPickedUp = true;
+        if(!gp.isGlobalPickedUp){
+            if (mouseH.pressed && isSelected()) {
+                isPickedUp = true;
+                gp.isGlobalPickedUp = true;
+            }
         }
+
         if(isPickedUp){
             pos.x = gp.getMousePosition().x - offset;
             pos.y = gp.getMousePosition().y - offset;
             if(!mouseH.pressed){
                 isPickedUp = false;
+                gp.isGlobalPickedUp = false;
+                gridSnap();
             }
         }
     }
+
 
     public void gridSnap(){
         pos.x = grid.translate().x * gp.tileSize;
@@ -47,18 +56,27 @@ public class Card extends Entity {
     }
 
     public boolean isSelected(){
-        return gp.getMousePosition().x >= pos.x && gp.getMousePosition().y >= pos.y && gp.getMousePosition().x <= pos.x + gp.tileSize && gp.getMousePosition().y <= pos.y + gp.tileSize;
+            return gp.getMousePosition().x >= pos.x && gp.getMousePosition().y >= pos.y && gp.getMousePosition().x <= pos.x + gp.tileSize && gp.getMousePosition().y <= pos.y + gp.tileSize;
     }
 
     public void setDefaultValues() {
         pos.x = 100;
         pos.y = 100;
     }
+
+    public void colorCard(){
+        Random rand = new Random();
+        float r = rand.nextFloat();
+        float g = rand.nextFloat();
+        float b = rand.nextFloat();
+        color = new Color(r, g, b);
+    }
+
     public void update(){
         pickUp();
     }
     public void draw(Graphics2D g2){
-        g2.setColor(Color.white);
+        g2.setColor(color);
 
         g2.fillRect(pos.x, pos.y , gp.tileSize, gp.tileSize);
     }

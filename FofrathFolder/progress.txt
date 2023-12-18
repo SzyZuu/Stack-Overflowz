@@ -26,4 +26,12 @@
  14.12.23
  - testing adding cards
  - bug fixes for mouse and grid
- - some work on grid snapping 
+ - some work on grid snapping
+4. Week
+ 18.12.2023
+ - finished implementing grid
+ - independently selectable cards
+ - performance fixes
+ - random colors (for fun)
+ - gridarray with Stacks (STACK OVERFLOWZ) + base for further game logic
+ - ready for flexx
