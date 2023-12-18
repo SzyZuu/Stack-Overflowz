@@ -7,7 +7,6 @@ import main.MouseHandler;
 import java.awt.*;
 
 public class Card extends Entity {
-
     GamePanel gp;
     KeyHandler keyH;
     MouseHandler mouseH;
@@ -57,5 +56,4 @@ public class Card extends Entity {
 
         g2.fillRect(pos.x, pos.y , gp.tileSize, gp.tileSize);
     }
-
 }
