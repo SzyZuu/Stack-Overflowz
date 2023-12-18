@@ -1,7 +1,8 @@
 package main;
 
+import entity.Card;
+
 import java.awt.*;
-import java.util.Stack;
 
 //temp for testing, might become permanent// currently doesnt work
 //todo fix my spaghetti code
@@ -13,13 +14,21 @@ public class Grid implements Runnable {
     int tileCornerBRx; // bottom right
 
     GamePanel gp;
+
     Thread gridThread;
 
     public Grid(GamePanel gamp){
         this.gp = gamp;
+
+        for (int i = 0; i < 16; i++) {
+            for (int j = 0; j < 12; j++) {
+                gridArray[i][j] = new Stack<>();
+            }
+        }
     }
-    Object[][] gridArray = new Object[16][12];
-    Stack<Object> stk = new Stack<>();
+
+    Stack<Card>[][] gridArray = new Stack[16][12];
+
     public Point currentNearestGrid(){
 
         Point gridPoint = new Point();
@@ -44,7 +53,6 @@ public class Grid implements Runnable {
         if(currentNearestGrid() != null ) {
             transPoint.x = gp.maxScreenColumns - currentNearestGrid().x;
             transPoint.y = gp.maxScreenRows - currentNearestGrid().y;
-            System.out.println(gridArray[transPoint.x][transPoint.y]);
             return transPoint;
 
         }
@@ -53,11 +61,21 @@ public class Grid implements Runnable {
         }
 
     }
-    public void setGridArray(){
-        gridArray[translate().x][translate().y] = true;
+
+    public void setGridArray(Card card){
+        gridArray[translate().x][translate().y].push(card) ;
     }
-    public void clearGridArraySlot(){
-        gridArray[translate().x][translate().y] = false;
+
+    public void clearGridArraySlot() {
+        int x = translate().x;
+        int y = translate().y;
+
+        if (x >= 0 && x < 16 && y >= 0 && y < 12) {
+            Stack<Card> stack = gridArray[x][y];
+            if (!stack.empty()) {
+                stack.pop();
+            }
+        }
     }
 
     public void startGridThread(){
@@ -68,9 +86,8 @@ public class Grid implements Runnable {
     @Override
     public void run() {
         while(gridThread != null){
-            currentNearestGrid();
-            translate();
-
+            //currentNearestGrid();
+            //translate();
         }
     }
 }
