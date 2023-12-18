@@ -55,7 +55,7 @@ public class GamePanel extends JPanel implements Runnable{
         double drawInterval = 1000000000 / FPS ; // 0.0166 seconds
         double nextDrawTime = System.nanoTime() + drawInterval;
 
-        card2.pos.x += 128;
+        card2.pos.x += 128;         //move second card to the side so no overlap
 
         while (gameThread != null){
 
@@ -88,7 +88,7 @@ public class GamePanel extends JPanel implements Runnable{
         }
     }
     public void update(){
-        card1.update();
+        card1.update();         //update both cards, later needs to be changed to call update on EACH card automatically
         card2.update();
     }
 
@@ -98,8 +98,8 @@ public class GamePanel extends JPanel implements Runnable{
 
         Graphics2D g2 = (Graphics2D)g;      //ensures that the graphics are 2d
 
-        card1.draw(g2);
-        card2.testDraw(g2);
+        card1.draw(g2);                     //draw both cards, needs to be automated
+        card2.draw(g2);
 
         //g2.drawString("fortnite", screenWidth /2 - 10, screenHeight/ 2 - 3);      // secret :D
 

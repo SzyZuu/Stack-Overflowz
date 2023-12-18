@@ -7,7 +7,6 @@ import main.MouseHandler;
 import java.awt.*;
 
 public class Card extends Entity {
-
     GamePanel gp;
     KeyHandler keyH;
     MouseHandler mouseH;
@@ -56,11 +55,5 @@ public class Card extends Entity {
         g2.setColor(Color.white);
 
         g2.fillRect(pos.x, pos.y , gp.tileSize, gp.tileSize);
-    }
-
-    public void testDraw(Graphics2D g2){
-        g2.setColor(Color.red);
-
-        g2.fillRect(pos.x, pos.y, gp.tileSize, gp.tileSize);
     }
 }
