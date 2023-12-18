@@ -40,6 +40,12 @@ public class Card extends Entity {
         }
     }
 
+    public void gridSnap(){
+        pos.x = grid.translate().x * gp.tileSize;
+        pos.y = grid.translate().y * gp.tileSize;
+        grid.setGridArray(this);
+    }
+
     public boolean isSelected(){
         return gp.getMousePosition().x >= pos.x && gp.getMousePosition().y >= pos.y && gp.getMousePosition().x <= pos.x + gp.tileSize && gp.getMousePosition().y <= pos.y + gp.tileSize;
     }
