@@ -1,7 +1,6 @@
 package main;
 
 import java.awt.*;
-import java.util.Stack;
 
 //temp for testing, might become permanent// currently doesnt work
 //todo fix my spaghetti code
@@ -13,13 +12,16 @@ public class Grid implements Runnable {
     int tileCornerBRx; // bottom right
 
     GamePanel gp;
+
+   //Object[][] gridArray;
+
+
     Thread gridThread;
 
     public Grid(GamePanel gamp){
         this.gp = gamp;
     }
-    Object[][] gridArray = new Object[16][12];
-    Stack<Object> stk = new Stack<>();
+    Boolean[][] gridArray = new Boolean[16][12];
     public Point currentNearestGrid(){
 
         Point gridPoint = new Point();
