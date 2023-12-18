@@ -29,6 +29,7 @@ public class GamePanel extends JPanel implements Runnable{
     Grid grid = new Grid(this);
 
     Thread gameThread;
+    public boolean isGlobalPickedUp;
 
     Card card1 = new Card(this, keyH, mouseH, grid);
     Card card2 = new Card(this, keyH, mouseH, grid);

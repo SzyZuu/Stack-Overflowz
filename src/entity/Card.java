@@ -28,17 +28,24 @@ public class Card extends Entity {
     }
 
     public void pickUp(){
-        if(mouseH.pressed && isSelected()){
-            isPickedUp = true;
+        if(!gp.isGlobalPickedUp){
+            if (mouseH.pressed && isSelected()) {
+                isPickedUp = true;
+                gp.isGlobalPickedUp = true;
+            }
         }
+
         if(isPickedUp){
             pos.x = gp.getMousePosition().x - offset;
             pos.y = gp.getMousePosition().y - offset;
             if(!mouseH.pressed){
                 isPickedUp = false;
+                gp.isGlobalPickedUp = false;
+                gridSnap();
             }
         }
     }
+
 
     public void gridSnap(){
         pos.x = grid.translate().x * gp.tileSize;
@@ -47,7 +54,7 @@ public class Card extends Entity {
     }
 
     public boolean isSelected(){
-        return gp.getMousePosition().x >= pos.x && gp.getMousePosition().y >= pos.y && gp.getMousePosition().x <= pos.x + gp.tileSize && gp.getMousePosition().y <= pos.y + gp.tileSize;
+            return gp.getMousePosition().x >= pos.x && gp.getMousePosition().y >= pos.y && gp.getMousePosition().x <= pos.x + gp.tileSize && gp.getMousePosition().y <= pos.y + gp.tileSize;
     }
 
     public void setDefaultValues() {
