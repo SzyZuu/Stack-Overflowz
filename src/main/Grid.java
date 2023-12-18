@@ -19,6 +19,12 @@ public class Grid implements Runnable {
 
     public Grid(GamePanel gamp){
         this.gp = gamp;
+
+        for (int i = 0; i < 16; i++) {
+            for (int j = 0; j < 12; j++) {
+                gridArray[i][j] = new Stack<>();
+            }
+        }
     }
     Stack<Card>[][] gridArray = new Stack[16][12];
     public Point currentNearestGrid(){
@@ -45,7 +51,6 @@ public class Grid implements Runnable {
         if(currentNearestGrid() != null ) {
             transPoint.x = gp.maxScreenColumns - currentNearestGrid().x;
             transPoint.y = gp.maxScreenRows - currentNearestGrid().y;
-            System.out.println(gridArray[transPoint.x][transPoint.y]);
             return transPoint;
 
         }
