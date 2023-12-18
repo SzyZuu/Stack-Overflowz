@@ -7,7 +7,6 @@ import main.MouseHandler;
 import java.awt.*;
 
 public class Card extends Entity {
-
     GamePanel gp;
     KeyHandler keyH;
     MouseHandler mouseH;
@@ -33,12 +32,10 @@ public class Card extends Entity {
             isPickedUp = true;
         }
         if(isPickedUp){
-            grid.clearGridArraySlot();
             pos.x = gp.getMousePosition().x - offset;
             pos.y = gp.getMousePosition().y - offset;
             if(!mouseH.pressed){
                 isPickedUp = false;
-                gridSnap();
             }
         }
     }
@@ -48,7 +45,6 @@ public class Card extends Entity {
         pos.y = grid.translate().y * gp.tileSize;
         grid.setGridArray(this);
     }
-
 
     public boolean isSelected(){
         return gp.getMousePosition().x >= pos.x && gp.getMousePosition().y >= pos.y && gp.getMousePosition().x <= pos.x + gp.tileSize && gp.getMousePosition().y <= pos.y + gp.tileSize;
@@ -66,5 +62,4 @@ public class Card extends Entity {
 
         g2.fillRect(pos.x, pos.y , gp.tileSize, gp.tileSize);
     }
-
 }

@@ -12,7 +12,7 @@ public class Main {
 
         GamePanel gamePanel = new GamePanel();
         Grid grid = new Grid(gamePanel);
-        MainThread mainThread = new MainThread(gamePanel, grid);
+        //MainThread mainThread = new MainThread(gamePanel, grid);
 
         window.add(gamePanel);
         window.pack(); // causes window to be preferred size and layout

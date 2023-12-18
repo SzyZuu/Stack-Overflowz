@@ -3,7 +3,6 @@ package main;
 import entity.Card;
 
 import java.awt.*;
-import java.util.Stack;
 
 //temp for testing, might become permanent// currently doesnt work
 //todo fix my spaghetti code
@@ -15,6 +14,7 @@ public class Grid implements Runnable {
     int tileCornerBRx; // bottom right
 
     GamePanel gp;
+
     Thread gridThread;
 
     public Grid(GamePanel gamp){
@@ -26,7 +26,9 @@ public class Grid implements Runnable {
             }
         }
     }
+
     Stack<Card>[][] gridArray = new Stack[16][12];
+
     public Point currentNearestGrid(){
 
         Point gridPoint = new Point();
@@ -59,6 +61,7 @@ public class Grid implements Runnable {
         }
 
     }
+
     public void setGridArray(Card card){
         gridArray[translate().x][translate().y].push(card) ;
     }
