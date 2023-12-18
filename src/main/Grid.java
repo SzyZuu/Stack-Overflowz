@@ -1,5 +1,7 @@
 package main;
 
+import entity.Card;
+
 import java.awt.*;
 import java.util.Stack;
 
@@ -18,8 +20,7 @@ public class Grid implements Runnable {
     public Grid(GamePanel gamp){
         this.gp = gamp;
     }
-    Object[][] gridArray = new Object[16][12];
-    Stack<Object> stk = new Stack<>();
+    Stack<Card>[][] gridArray = new Stack[16][12];
     public Point currentNearestGrid(){
 
         Point gridPoint = new Point();
@@ -53,11 +54,20 @@ public class Grid implements Runnable {
         }
 
     }
-    public void setGridArray(){
-        gridArray[translate().x][translate().y] = true;
+    public void setGridArray(Card card){
+        gridArray[translate().x][translate().y].push(card) ;
     }
-    public void clearGridArraySlot(){
-        gridArray[translate().x][translate().y] = false;
+
+    public void clearGridArraySlot() {
+        int x = translate().x;
+        int y = translate().y;
+
+        if (x >= 0 && x < 16 && y >= 0 && y < 12) {
+            Stack<Card> stack = gridArray[x][y];
+            if (!stack.empty()) {
+                stack.pop();
+            }
+        }
     }
 
     public void startGridThread(){
@@ -68,9 +78,8 @@ public class Grid implements Runnable {
     @Override
     public void run() {
         while(gridThread != null){
-            currentNearestGrid();
-            translate();
-
+            //currentNearestGrid();
+            //translate();
         }
     }
 }

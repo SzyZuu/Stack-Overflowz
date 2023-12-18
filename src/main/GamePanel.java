@@ -55,6 +55,7 @@ public class GamePanel extends JPanel implements Runnable{
         double drawInterval = 1000000000 / FPS ; // 0.0166 seconds
         double nextDrawTime = System.nanoTime() + drawInterval;
 
+        card2.pos.x += 128;         //move second card to the side so no overlap
 
         while (gameThread != null){
 

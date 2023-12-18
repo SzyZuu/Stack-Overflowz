@@ -46,7 +46,7 @@ public class Card extends Entity {
     public void gridSnap(){
         pos.x = grid.translate().x * gp.tileSize;
         pos.y = grid.translate().y * gp.tileSize;
-        grid.setGridArray();
+        grid.setGridArray(this);
     }
 
 
