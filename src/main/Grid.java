@@ -13,15 +13,12 @@ public class Grid implements Runnable {
 
     GamePanel gp;
 
-   //Object[][] gridArray;
-
-
     Thread gridThread;
 
     public Grid(GamePanel gamp){
         this.gp = gamp;
     }
-    Boolean[][] gridArray = new Boolean[16][12];
+
     public Point currentNearestGrid(){
 
         Point gridPoint = new Point();
@@ -46,7 +43,6 @@ public class Grid implements Runnable {
         if(currentNearestGrid() != null ) {
             transPoint.x = gp.maxScreenColumns - currentNearestGrid().x;
             transPoint.y = gp.maxScreenRows - currentNearestGrid().y;
-            System.out.println(gridArray[transPoint.x][transPoint.y]);
             return transPoint;
 
         }
@@ -54,12 +50,6 @@ public class Grid implements Runnable {
             return null;
         }
 
-    }
-    public void setGridArray(){
-        gridArray[translate().x][translate().y] = true;
-    }
-    public void clearGridArraySlot(){
-        gridArray[translate().x][translate().y] = false;
     }
 
     public void startGridThread(){
@@ -72,7 +62,7 @@ public class Grid implements Runnable {
         while(gridThread != null){
             currentNearestGrid();
             translate();
-
+            //System.out.println(translate());
         }
     }
 }
