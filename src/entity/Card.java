@@ -43,6 +43,7 @@ public class Card extends Entity {
         if(isPickedUp){
             pos.x = gp.getMousePosition().x - offset;
             pos.y = gp.getMousePosition().y - offset;
+            gp.repaintNeeded = true;
             if(!mouseH.pressed){
                 isPickedUp = false;
                 gp.isGlobalPickedUp = false;

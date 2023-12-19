@@ -5,9 +5,7 @@ import entity.Card;
 import java.awt.*;
 import java.util.Stack;
 
-//temp for testing, might become permanent// currently doesnt work
-//todo fix my spaghetti code
-public class Grid implements Runnable {
+public class Grid /*implements Runnable*/ {
 
     int tileCornerTLy; // top left
     int tileCornerTLx; // top left
@@ -98,7 +96,7 @@ public class Grid implements Runnable {
         }
     }
 
-    public void startGridThread(){
+    /*public void startGridThread(){
         gridThread = new Thread(this);
         gridThread.start();
     }
@@ -109,5 +107,5 @@ public class Grid implements Runnable {
             //currentNearestGrid();
             //translate();
         }
-    }
+    }*/
 }

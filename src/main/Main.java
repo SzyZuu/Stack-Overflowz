@@ -23,6 +23,6 @@ public class Main {
 
         //mainThread.startMainThread();
         gamePanel.startGameThread();
-        grid.startGridThread();
+        //grid.startGridThread();
     }
 }
