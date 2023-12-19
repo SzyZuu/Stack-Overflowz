@@ -28,7 +28,7 @@ public class Grid implements Runnable {
         }
     }
 
-    Stack<Card>[][] gridArray = new Stack[16][12];
+    public Stack<Card>[][] gridArray = new Stack[16][12];
 
     public Point currentNearestGrid(){
 
@@ -60,7 +60,16 @@ public class Grid implements Runnable {
         else {
             return null;
         }
+    }
 
+    public Point independentTranslate(Card c){
+        Point iTrans = new Point();
+        iTrans.x = gp.maxScreenColumns - Math.round(c.pos.x / gp.tileSize);
+        iTrans.y = gp.maxScreenRows - Math.round(c.pos.y / gp.tileSize);
+        return iTrans;
+    }
+    public void setInitialGridArray(Card c){
+        gridArray[independentTranslate(c).x][independentTranslate(c).y].push(c) ;
     }
 
     public void setGridArray(Card card){

@@ -25,6 +25,7 @@ public class Card extends Entity {
         this.mouseH = mouseH;
         this. grid = g;
         setDefaultValues();
+        initialGridSnap();
         offsetMath = (float) gp.tileSize / 2;
         offset = Math.round(offsetMath);
     }
@@ -34,6 +35,8 @@ public class Card extends Entity {
             if (mouseH.pressed && isSelected()) {
                 isPickedUp = true;
                 gp.isGlobalPickedUp = true;
+                grid.clearGridArraySlot();
+                gp.repaintNeeded = true;
             }
         }
 
@@ -44,6 +47,7 @@ public class Card extends Entity {
                 isPickedUp = false;
                 gp.isGlobalPickedUp = false;
                 gridSnap();
+                gp.repaintNeeded = true;
             }
         }
     }
@@ -53,6 +57,12 @@ public class Card extends Entity {
         pos.x = grid.translate().x * gp.tileSize;
         pos.y = grid.translate().y * gp.tileSize;
         grid.setGridArray(this);
+    }
+    public void initialGridSnap(){
+        pos.x = grid.independentTranslate(this).x * gp.tileSize;
+        pos.y = grid.independentTranslate(this).y * gp.tileSize;
+        grid.setInitialGridArray(this);
+        gp.initialRepaintNeeded = true;
     }
 
     public boolean isSelected(){

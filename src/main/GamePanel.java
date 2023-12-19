@@ -4,8 +4,7 @@ import entity.Card;
 
 import javax.swing.*;
 import java.awt.*;
-
-
+import java.util.ArrayList;
 
 
 public class GamePanel extends JPanel implements Runnable{
@@ -30,7 +29,9 @@ public class GamePanel extends JPanel implements Runnable{
 
     Thread gameThread;
     public boolean isGlobalPickedUp;
-
+    public boolean repaintNeeded = false;
+    public boolean initialRepaintNeeded = false;
+    ArrayList<Card> cardList = new ArrayList<Card>();
     Card card1 = new Card(this, keyH, mouseH, grid);
     Card card2 = new Card(this, keyH, mouseH, grid);
 
@@ -56,17 +57,14 @@ public class GamePanel extends JPanel implements Runnable{
         double drawInterval = 1000000000 / FPS ; // 0.0166 seconds
         double nextDrawTime = System.nanoTime() + drawInterval;
 
+        cardList.add(card1);
+        cardList.add(card2);
+
         card2.pos.x += 128;         //move second card to the side so no overlap
         card1.colorCard();
         card2.colorCard();
 
         while (gameThread != null){
-
-            //long currentTime = System.nanoTime();
-            //System.out.println("current time" + currentTime);
-
-
-            //System.out.println("its on, trust me"); // confirmation that the game is running, for safety purposes
             // 1 UPDATE: update information such as character positions
             update();
             // 2 DRAW: draw the screen with the updated screen information
@@ -90,6 +88,23 @@ public class GamePanel extends JPanel implements Runnable{
 
         }
     }
+
+    public void sequencedDraw(Graphics2D g2){
+        if(repaintNeeded){
+            grid.gridArray[grid.translate().x][grid.translate().y].peek().draw(g2);
+            repaintNeeded = false;
+        }
+    }
+
+    public void initialDraw(Graphics2D g2){
+        if(initialRepaintNeeded){
+            for(int i = 0; i > cardList.size(); i++){
+            grid.gridArray[grid.independentTranslate(cardList.get(i)).x][grid.independentTranslate(cardList.get(i)).y].peek().draw(g2);
+            initialRepaintNeeded = false;
+            }
+        }
+    }
+
     public void update(){
         card1.update();         //update both cards, later needs to be changed to call update on EACH card automatically
         card2.update();
@@ -101,8 +116,10 @@ public class GamePanel extends JPanel implements Runnable{
 
         Graphics2D g2 = (Graphics2D)g;      //ensures that the graphics are 2d
 
-        card1.draw(g2);                     //draw both cards, needs to be automated
-        card2.draw(g2);
+        sequencedDraw(g2);
+        initialDraw(g2);
+        /*card1.draw(g2);                     //draw both cards, needs to be automated
+        card2.draw(g2);*/
 
         //g2.drawString("fortnite", screenWidth /2 - 10, screenHeight/ 2 - 3);      // secret :D
 
