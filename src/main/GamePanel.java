@@ -5,6 +5,7 @@ import entity.Card;
 import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
+import java.util.Stack;
 
 
 public class GamePanel extends JPanel implements Runnable{
@@ -20,7 +21,6 @@ public class GamePanel extends JPanel implements Runnable{
 
     final int screenWidth = maxScreenColumns * tileSize; // 1024 Px
     final int screenHeight = maxScreenRows * tileSize;  // 768 Px
-
     //FPS
     int FPS = 60;
     KeyHandler keyH = new KeyHandler();
@@ -29,8 +29,7 @@ public class GamePanel extends JPanel implements Runnable{
 
     Thread gameThread;
     public boolean isGlobalPickedUp;
-    public boolean repaintNeeded = false;
-    public boolean initialRepaintNeeded = false;
+    public boolean repaintNeeded = true;
     ArrayList<Card> cardList = new ArrayList<Card>();
     Card card1 = new Card(this, keyH, mouseH, grid);
     Card card2 = new Card(this, keyH, mouseH, grid);
@@ -89,19 +88,16 @@ public class GamePanel extends JPanel implements Runnable{
         }
     }
 
-    public void sequencedDraw(Graphics2D g2){
-        if(repaintNeeded){
-            grid.gridArray[grid.translate().x][grid.translate().y].peek().draw(g2);
-            repaintNeeded = false;
-        }
-    }
-
-    public void initialDraw(Graphics2D g2){
-        if(initialRepaintNeeded){
-            for(int i = 0; i > cardList.size(); i++){
-            grid.gridArray[grid.independentTranslate(cardList.get(i)).x][grid.independentTranslate(cardList.get(i)).y].peek().draw(g2);
-            initialRepaintNeeded = false;
+    public void sequencedDraw(Graphics2D g2) {
+        if (repaintNeeded) {
+            for (Stack<Card>[] row : grid.gridArray) {
+                for (Stack<Card> stack : row) {
+                    if (!stack.isEmpty()) {
+                        stack.peek().draw(g2);
+                    }
+                }
             }
+            repaintNeeded = false;
         }
     }
 
@@ -117,7 +113,6 @@ public class GamePanel extends JPanel implements Runnable{
         Graphics2D g2 = (Graphics2D)g;      //ensures that the graphics are 2d
 
         sequencedDraw(g2);
-        initialDraw(g2);
         /*card1.draw(g2);                     //draw both cards, needs to be automated
         card2.draw(g2);*/
 

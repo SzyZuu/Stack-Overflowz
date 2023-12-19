@@ -62,12 +62,22 @@ public class Grid implements Runnable {
         }
     }
 
-    public Point independentTranslate(Card c){
+    public Point independentTranslate(Card c) {
         Point iTrans = new Point();
-        iTrans.x = gp.maxScreenColumns - Math.round(c.pos.x / gp.tileSize);
-        iTrans.y = gp.maxScreenRows - Math.round(c.pos.y / gp.tileSize);
+        int x = Math.round(c.pos.x / gp.tileSize);
+        int y = Math.round(c.pos.y / gp.tileSize);
+
+        // Check if the indices are within the valid range
+        if (x >= 0 && x < 16 && y >= 0 && y < 12) {
+            iTrans.x = x;
+            iTrans.y = y;
+        } else {
+            iTrans = null; // null or default values
+        }
+
         return iTrans;
     }
+
     public void setInitialGridArray(Card c){
         gridArray[independentTranslate(c).x][independentTranslate(c).y].push(c) ;
     }

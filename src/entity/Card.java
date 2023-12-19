@@ -62,7 +62,6 @@ public class Card extends Entity {
         pos.x = grid.independentTranslate(this).x * gp.tileSize;
         pos.y = grid.independentTranslate(this).y * gp.tileSize;
         grid.setInitialGridArray(this);
-        gp.initialRepaintNeeded = true;
     }
 
     public boolean isSelected(){
