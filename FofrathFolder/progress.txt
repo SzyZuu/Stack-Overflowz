@@ -35,3 +35,10 @@
  - random colors (for fun)
  - gridarray with Stacks (STACK OVERFLOWZ) + base for further game logic
  - ready for flexx
+ ?. Week
+ <30.12.2023
+ - ???
+ ?+1. Week
+ 30.12.2023
+ - fixed stacking order
+ - fixed drawing order

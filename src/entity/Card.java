@@ -33,6 +33,7 @@ public class Card extends Entity {
     public void pickUp(){
         if(!gp.isGlobalPickedUp){
             if (mouseH.pressed && isSelected()) {
+                //grid.gridArray[grid.independentTranslate(this).x][grid.independentTranslate(this).y].peek().
                 isPickedUp = true;
                 gp.isGlobalPickedUp = true;
                 grid.clearGridArraySlot();
@@ -43,12 +44,13 @@ public class Card extends Entity {
         if(isPickedUp){
             pos.x = gp.getMousePosition().x - offset;
             pos.y = gp.getMousePosition().y - offset;
+
             gp.repaintNeeded = true;
             if(!mouseH.pressed){
                 isPickedUp = false;
                 gp.isGlobalPickedUp = false;
                 gridSnap();
-                gp.repaintNeeded = true;
+                //gp.repaintNeeded = true;
             }
         }
     }
@@ -70,8 +72,8 @@ public class Card extends Entity {
     }
 
     public void setDefaultValues() {
-        pos.x = 100;
-        pos.y = 100;
+        pos.x = 0;
+        pos.y = 0;
     }
 
     public void colorCard(){
@@ -89,5 +91,14 @@ public class Card extends Entity {
         g2.setColor(color);
 
         g2.fillRect(pos.x, pos.y , gp.tileSize, gp.tileSize);
+    }
+
+    public void pickedUpDraw(Graphics2D g2){
+
+        if(isPickedUp){
+            g2.setColor(color);
+
+            g2.fillRect(pos.x, pos.y , gp.tileSize, gp.tileSize);
+        }
     }
 }

@@ -62,6 +62,8 @@ public class GamePanel extends JPanel implements Runnable{
         card2.pos.x += 128;         //move second card to the side so no overlap
         card1.colorCard();
         card2.colorCard();
+        grid.gridArray[0][0].add(card1);
+        grid.gridArray[2][0].add(card2);
 
         while (gameThread != null){
             // 1 UPDATE: update information such as character positions
@@ -97,9 +99,12 @@ public class GamePanel extends JPanel implements Runnable{
                     }
                 }
             }
-            repaintNeeded = false;
+            //repaintNeeded = false;
         }
     }
+
+
+
 
     public void update(){
         card1.update();         //update both cards, later needs to be changed to call update on EACH card automatically
@@ -113,6 +118,9 @@ public class GamePanel extends JPanel implements Runnable{
         Graphics2D g2 = (Graphics2D)g;      //ensures that the graphics are 2d
 
         sequencedDraw(g2);
+        for(int i = 0; i < cardList.size(); i++){
+            cardList.get(i).pickedUpDraw(g2);
+        }
         /*card1.draw(g2);                     //draw both cards, needs to be automated
         card2.draw(g2);*/
 
