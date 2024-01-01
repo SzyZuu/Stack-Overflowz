@@ -10,7 +10,7 @@ import java.util.Stack;
 
 public class GamePanel extends JPanel implements Runnable{
 
-    // Screenz Settingz
+    // Screen Settings
     final int baseTileSize = 32; // Tile size 32x32
     final int scale = 2; // Scaling (tiles appear larger)
 
@@ -30,7 +30,7 @@ public class GamePanel extends JPanel implements Runnable{
     Thread gameThread;
     public boolean isGlobalPickedUp;
     public boolean repaintNeeded = true;
-    ArrayList<Card> cardList = new ArrayList<Card>();
+    ArrayList<Card> cardList = new ArrayList<>();
     Card card1 = new Card(this, keyH, mouseH, grid);
     Card card2 = new Card(this, keyH, mouseH, grid);
 
@@ -53,7 +53,7 @@ public class GamePanel extends JPanel implements Runnable{
     @Override
     public void run() {                             // game loop
 
-        double drawInterval = 1000000000 / FPS ; // 0.0166 seconds
+        double drawInterval = (double) 1000000000 / FPS ; // 0.0166 seconds
         double nextDrawTime = System.nanoTime() + drawInterval;
 
         cardList.add(card1);
@@ -118,11 +118,9 @@ public class GamePanel extends JPanel implements Runnable{
         Graphics2D g2 = (Graphics2D)g;      //ensures that the graphics are 2d
 
         sequencedDraw(g2);
-        for(int i = 0; i < cardList.size(); i++){
-            cardList.get(i).pickedUpDraw(g2);
+        for (Card card : cardList) {
+            card.pickedUpDraw(g2);
         }
-        /*card1.draw(g2);                     //draw both cards, needs to be automated
-        card2.draw(g2);*/
 
         //g2.drawString("fortnite", screenWidth /2 - 10, screenHeight/ 2 - 3);      // secret :D
 

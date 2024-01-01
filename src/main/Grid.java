@@ -16,8 +16,8 @@ public class Grid /*implements Runnable*/ {
 
     Thread gridThread;
 
-    public Grid(GamePanel gamp){
-        this.gp = gamp;
+    public Grid(GamePanel gameP){
+        this.gp = gameP;
 
         for (int i = 0; i < 16; i++) {
             for (int j = 0; j < 12; j++) {
@@ -62,8 +62,8 @@ public class Grid /*implements Runnable*/ {
 
     public Point independentTranslate(Card c) {
         Point iTrans = new Point();
-        int x = Math.round(c.pos.x / gp.tileSize);
-        int y = Math.round(c.pos.y / gp.tileSize);
+        int x = Math.round((float) c.pos.x / gp.tileSize);
+        int y = Math.round((float) c.pos.y / gp.tileSize);
 
         // Check if the indices are within the valid range
         if (x >= 0 && x < 16 && y >= 0 && y < 12) {

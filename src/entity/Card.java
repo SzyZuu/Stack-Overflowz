@@ -79,9 +79,7 @@ public class Card extends Entity {
 
     public boolean isAtTop(){
         if(!grid.gridArray[currentGridPosX][currentGridPosY].isEmpty()){
-            if (this == grid.gridArray[currentGridPosX][currentGridPosY].peek()){
-                return true;
-            }
+            return this == grid.gridArray[currentGridPosX][currentGridPosY].peek();
         }
         return false;
     }
