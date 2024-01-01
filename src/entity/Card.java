@@ -17,6 +17,9 @@ public class Card extends Entity {
     //int offset = 32; //Math.round(gp.tileSize/2);
     float offsetMath;
     int offset;
+
+    int currentGridPosX;
+    int currentGridPosY;
     Color color;
 
     public Card(GamePanel gp, KeyHandler keyH, MouseHandler mouseH, Grid g){
@@ -51,14 +54,17 @@ public class Card extends Entity {
                 gp.isGlobalPickedUp = false;
                 gridSnap();
                 //gp.repaintNeeded = true;
+                grid.currentUsedStacks();
             }
         }
     }
 
 
     public void gridSnap(){
-        pos.x = grid.translate().x * gp.tileSize;
-        pos.y = grid.translate().y * gp.tileSize;
+        currentGridPosX = grid.translate().x;
+        currentGridPosY = grid.translate().y;
+        pos.x = currentGridPosX * gp.tileSize;
+        pos.y = currentGridPosY * gp.tileSize;
         grid.setGridArray(this);
     }
     public void initialGridSnap(){
@@ -68,8 +74,18 @@ public class Card extends Entity {
     }
 
     public boolean isSelected(){
-            return gp.getMousePosition().x >= pos.x && gp.getMousePosition().y >= pos.y && gp.getMousePosition().x <= pos.x + gp.tileSize && gp.getMousePosition().y <= pos.y + gp.tileSize;
+            return gp.getMousePosition().x >= pos.x && gp.getMousePosition().y >= pos.y && gp.getMousePosition().x <= pos.x + gp.tileSize && gp.getMousePosition().y <= pos.y + gp.tileSize && isAtTop();
     }
+
+    public boolean isAtTop(){
+        if(!grid.gridArray[currentGridPosX][currentGridPosY].isEmpty()){
+            if (this == grid.gridArray[currentGridPosX][currentGridPosY].peek()){
+                return true;
+            }
+        }
+        return false;
+    }
+
 
     public void setDefaultValues() {
         pos.x = 0;

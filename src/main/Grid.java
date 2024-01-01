@@ -96,8 +96,20 @@ public class Grid /*implements Runnable*/ {
         }
     }
 
+    public void currentUsedStacks(){
+        for(int i = 0; i < gp.maxScreenColumns; i++){
+            for(int j = 0; j < gp.maxScreenRows; j++){
+                if(!gridArray[i][j].isEmpty()){
+                    System.out.println("x" + i);
+                    System.out.println("y" + j);
+                    System.out.println(gridArray[i][j].peek());
+                }
+            }
+        }
+    }
+
     /*public void startGridThread(){
-        gridThread = new Thread(this);
+        gridThread = new Thread(this);)
         gridThread.start();
     }
 
