@@ -6,6 +6,7 @@ import main.KeyHandler;
 import main.MouseHandler;
 import java.awt.*;
 import java.util.Random;
+import java.util.Stack;
 
 public class Card extends Entity {
     GamePanel gp;
@@ -27,14 +28,14 @@ public class Card extends Entity {
         this.keyH = keyH;
         this.mouseH = mouseH;
         this. grid = g;
-        setDefaultValues();
-        initialGridSnap();
+        //setDefaultValues();
+        //initialGridSnap();
         offsetMath = (float) gp.tileSize / 2;
         offset = Math.round(offsetMath);
     }
 
     public void pickUp(){
-        if(!gp.isGlobalPickedUp){
+        if(!gp.isGlobalPickedUp && !shitsFucked()){
             if (mouseH.pressed && isSelected()) {
                 //grid.gridArray[grid.independentTranslate(this).x][grid.independentTranslate(this).y].peek().
                 isPickedUp = true;
@@ -58,7 +59,12 @@ public class Card extends Entity {
             }
         }
     }
-
+    public boolean shitsFucked(){ //just for testing
+        if (pos != null ){
+            return false;
+        }
+        else return true;
+    }
 
     public void gridSnap(){
         currentGridPosX = grid.translate().x;
@@ -86,8 +92,18 @@ public class Card extends Entity {
 
 
     public void setDefaultValues() {
-        pos.x = 0;
-        pos.y = 0;
+        for (int i = 0; i < gp.maxScreenColumns; i++) {
+            for (int j = 0; j < gp.maxScreenRows; j++) {
+                if (!grid.gridArray[i][j].isEmpty() && grid.gridArray[i][j].search(this) != -1) {
+                    pos.x = i * gp.tileSize;
+                    pos.y = j * gp.tileSize;
+
+                    currentGridPosX = i;
+                    currentGridPosY = j;
+
+                }
+            }
+        }
     }
 
     public void colorCard(){

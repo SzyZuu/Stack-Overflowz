@@ -28,9 +28,9 @@ public class GamePanel extends JPanel implements Runnable{
     Grid grid = new Grid(this);
 
     Thread gameThread;
-    public boolean isGlobalPickedUp;
+    public boolean isGlobalPickedUp = false;
     public boolean repaintNeeded = true;
-    ArrayList<Card> cardList = new ArrayList<>();
+    ArrayList<Card> cardList = new ArrayList<Card>();
     Card card1 = new Card(this, keyH, mouseH, grid);
     Card card2 = new Card(this, keyH, mouseH, grid);
 
@@ -50,20 +50,29 @@ public class GamePanel extends JPanel implements Runnable{
         gameThread.start();
     }
 
+    public void startingCards(){
+        cardList.add(card1);
+        cardList.add(card2);
+
+        grid.gridArray[1][1].add(card1);
+        grid.gridArray[3][2].add(card2);
+
+        for(int i = 0; i < cardList.size(); i++){
+            cardList.get(i).colorCard();
+            cardList.get(i).setDefaultValues();
+            cardList.get(i).initialGridSnap();
+            System.out.println(cardList.get(i).pos);
+        }
+    }
+
     @Override
     public void run() {                             // game loop
 
         double drawInterval = (double) 1000000000 / FPS ; // 0.0166 seconds
         double nextDrawTime = System.nanoTime() + drawInterval;
 
-        cardList.add(card1);
-        cardList.add(card2);
 
-        card2.pos.x += 128;         //move second card to the side so no overlap
-        card1.colorCard();
-        card2.colorCard();
-        grid.gridArray[0][0].add(card1);
-        grid.gridArray[2][0].add(card2);
+
 
         while (gameThread != null){
             // 1 UPDATE: update information such as character positions
