@@ -62,10 +62,7 @@ public class Card extends Entity {
         }
     }
     public boolean shitsFucked(){ //just for testing
-        if (pos != null ){
-            return false;
-        }
-        else return true;
+        return pos == null;
     }
 
     public void gridSnap(){
