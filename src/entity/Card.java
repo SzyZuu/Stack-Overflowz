@@ -68,6 +68,9 @@ public class Card extends Entity {
         pos.x = currentGridPosX * gp.tileSize;
         pos.y = currentGridPosY * gp.tileSize;
         grid.setGridArray(this);
+
+        gp.cardHasBeenStacked = true;
+        gp.stackSizeChecker(currentGridPosX, currentGridPosY);
     }
     public void initialGridSnap(){
         pos.x = grid.independentTranslate(this).x * gp.tileSize;
@@ -85,7 +88,6 @@ public class Card extends Entity {
         }
         return false;
     }
-
 
     public void setDefaultValues() {
         for (int i = 0; i < gp.maxScreenColumns; i++) {
@@ -143,7 +145,6 @@ public class Card extends Entity {
                 break;
         }
     }
-
     public void update(){
         pickUp();
     }
