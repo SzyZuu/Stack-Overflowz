@@ -84,14 +84,30 @@ public class Grid /*implements Runnable*/ {
         gridArray[translate().x][translate().y].push(card) ;
     }
 
-    public void clearGridArraySlot() {
+    public void clearGridArraySlot(Card c) {
         int x = translate().x;
         int y = translate().y;
 
         if (x >= 0 && x < 16 && y >= 0 && y < 12) {
             Stack<Card> stack = gridArray[x][y];
-            if (!stack.empty()) {
+            if (!stack.empty() && c.isAtTop()) {
                 stack.pop();
+            }
+        }
+    }
+
+    public void ghostCardPrevention(){                               //smtIsNotVeryYes
+        for (int i = 0; i < gp.maxScreenColumns; i++) {
+            for (int j = 0; j < gp.maxScreenRows; j++) {
+                for(int l = 0; l < gp.cardList.size(); l++){
+                    if (!gridArray[i][j].isEmpty() && gridArray[i][j].search(gp.cardList.get(l)) != -1) {
+                        if(i != gp.cardList.get(l).getStartingGridPosX() && j != gp.cardList.get(l).getStartingGridPosY()){
+                            if(gridArray[gp.cardList.get(l).getStartingGridPosX()][gp.cardList.get(l).getStartingGridPosY()].search(gp.cardList.get(l)) != -1){
+                                gridArray[gp.cardList.get(l).getStartingGridPosX()][gp.cardList.get(l).getStartingGridPosY()].remove( gp.cardList.get(l));
+                            }
+                        }
+                    }
+                }
             }
         }
     }

@@ -21,6 +21,9 @@ public class Card extends Entity {
 
     int currentGridPosX;
     int currentGridPosY;
+    int startingGridPosX;
+    int startingGridPosY;
+
     Color color;
 
     public Card(GamePanel gp, KeyHandler keyH, MouseHandler mouseH, Grid g){
@@ -40,7 +43,7 @@ public class Card extends Entity {
                 //grid.gridArray[grid.independentTranslate(this).x][grid.independentTranslate(this).y].peek().
                 isPickedUp = true;
                 gp.isGlobalPickedUp = true;
-                grid.clearGridArraySlot();
+                grid.clearGridArraySlot(this);
                 gp.repaintNeeded = true;
             }
         }
@@ -104,6 +107,19 @@ public class Card extends Entity {
                 }
             }
         }
+    }
+
+    public void saveStartingPos(){
+        this.startingGridPosX = this.currentGridPosX;
+        this.startingGridPosY = this.currentGridPosY;
+    }
+
+    public int getStartingGridPosX() {
+        return startingGridPosX;
+    }
+
+    public int getStartingGridPosY() {
+        return startingGridPosY;
     }
 
     public void colorCard(){
