@@ -120,7 +120,7 @@ public class GamePanel extends JPanel implements Runnable{
         }
     }
 
-    public void checkAndCraft(){
+    public void checkAndCraft(Card c1, Card c2){
         for(CraftingListener cl : craftingListeners)
             cl.doCraft();
     }
