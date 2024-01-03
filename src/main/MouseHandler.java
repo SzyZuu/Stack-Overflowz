@@ -14,7 +14,7 @@ public class MouseHandler implements MouseListener {
 
     @Override
     public void mousePressed(MouseEvent e) {
-        System.out.println(e.getPoint());
+        System.out.println("Mouse was Pressed ( x|y: " + e.getPoint() + ")");
         pressed = true;
     }
 

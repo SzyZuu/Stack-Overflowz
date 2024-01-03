@@ -5,9 +5,7 @@ import entity.Card;
 import java.awt.*;
 import java.util.Stack;
 
-//temp for testing, might become permanent// currently doesnt work
-//todo fix my spaghetti code
-public class Grid implements Runnable {
+public class Grid /*implements Runnable*/ {
 
     int tileCornerTLy; // top left
     int tileCornerTLx; // top left
@@ -18,8 +16,8 @@ public class Grid implements Runnable {
 
     Thread gridThread;
 
-    public Grid(GamePanel gamp){
-        this.gp = gamp;
+    public Grid(GamePanel gameP){
+        this.gp = gameP;
 
         for (int i = 0; i < 16; i++) {
             for (int j = 0; j < 12; j++) {
@@ -28,7 +26,7 @@ public class Grid implements Runnable {
         }
     }
 
-    Stack<Card>[][] gridArray = new Stack[16][12];
+    public Stack<Card>[][] gridArray = new Stack[16][12];
 
     public Point currentNearestGrid(){
 
@@ -60,27 +58,74 @@ public class Grid implements Runnable {
         else {
             return null;
         }
+    }
 
+    public Point independentTranslate(Card c) {
+        Point iTrans = new Point();
+        int x = Math.round((float) c.pos.x / gp.tileSize);
+        int y = Math.round((float) c.pos.y / gp.tileSize);
+
+        // Check if the indices are within the valid range
+        if (x >= 0 && x < 16 && y >= 0 && y < 12) {
+            iTrans.x = x;
+            iTrans.y = y;
+        } else {
+            iTrans = null; // null or default values
+        }
+
+        return iTrans;
+    }
+
+    public void setInitialGridArray(Card c){
+        gridArray[independentTranslate(c).x][independentTranslate(c).y].push(c) ;
     }
 
     public void setGridArray(Card card){
         gridArray[translate().x][translate().y].push(card) ;
     }
 
-    public void clearGridArraySlot() {
+    public void clearGridArraySlot(Card c) {
         int x = translate().x;
         int y = translate().y;
 
         if (x >= 0 && x < 16 && y >= 0 && y < 12) {
             Stack<Card> stack = gridArray[x][y];
-            if (!stack.empty()) {
-                stack.pop();
+            if (!stack.empty() && c.isAtTop()) {
+                //stack.pop();
+                stack.remove(c);
             }
         }
     }
 
-    public void startGridThread(){
-        gridThread = new Thread(this);
+    public void ghostCardPrevention(){                               //smtIsNotVeryYes
+        for (int i = 0; i < gp.maxScreenColumns; i++) {
+            for (int j = 0; j < gp.maxScreenRows; j++) {
+                for(int l = 0; l < gp.cardList.size(); l++){
+                    if (!gridArray[i][j].isEmpty() && gridArray[i][j].search(gp.cardList.get(l)) != -1) {
+                        if(i != gp.cardList.get(l).getStartingGridPosX() && j != gp.cardList.get(l).getStartingGridPosY() || i == gp.cardList.get(l).getStartingGridPosX() && j != gp.cardList.get(l).getStartingGridPosY() || i != gp.cardList.get(l).getStartingGridPosX() && j == gp.cardList.get(l).getStartingGridPosY()){
+                            if(gridArray[gp.cardList.get(l).getStartingGridPosX()][gp.cardList.get(l).getStartingGridPosY()].search(gp.cardList.get(l)) != -1){
+                                gridArray[gp.cardList.get(l).getStartingGridPosX()][gp.cardList.get(l).getStartingGridPosY()].remove( gp.cardList.get(l));
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    public void currentUsedStacks(){
+        for(int i = 0; i < gp.maxScreenColumns; i++){
+            for(int j = 0; j < gp.maxScreenRows; j++){
+                if(!gridArray[i][j].isEmpty()){
+                    System.out.println("x" + i + "| y" + j);
+                    System.out.println(gridArray[i][j].peek());
+                }
+            }
+        }
+    }
+
+    /*public void startGridThread(){
+        gridThread = new Thread(this);)
         gridThread.start();
     }
 
@@ -90,5 +135,5 @@ public class Grid implements Runnable {
             //currentNearestGrid();
             //translate();
         }
-    }
+    }*/
 }

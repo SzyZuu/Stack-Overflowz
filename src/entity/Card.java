@@ -6,6 +6,7 @@ import main.KeyHandler;
 import main.MouseHandler;
 import java.awt.*;
 import java.util.Random;
+import java.util.Stack;
 
 public class Card extends Entity {
     GamePanel gp;
@@ -17,6 +18,12 @@ public class Card extends Entity {
     //int offset = 32; //Math.round(gp.tileSize/2);
     float offsetMath;
     int offset;
+
+    int currentGridPosX;
+    int currentGridPosY;
+    int startingGridPosX;
+    int startingGridPosY;
+
     Color color;
 
     public Card(GamePanel gp, KeyHandler keyH, MouseHandler mouseH, Grid g){
@@ -24,44 +31,91 @@ public class Card extends Entity {
         this.keyH = keyH;
         this.mouseH = mouseH;
         this. grid = g;
-        setDefaultValues();
+        //setDefaultValues();
+        //initialGridSnap();
         offsetMath = (float) gp.tileSize / 2;
         offset = Math.round(offsetMath);
     }
 
     public void pickUp(){
-        if(!gp.isGlobalPickedUp){
+        if(!gp.isGlobalPickedUp && !shitsFucked()){
             if (mouseH.pressed && isSelected()) {
                 isPickedUp = true;
                 gp.isGlobalPickedUp = true;
+                grid.clearGridArraySlot(this);
+                gp.repaintNeeded = true;
             }
         }
 
         if(isPickedUp){
             pos.x = gp.getMousePosition().x - offset;
             pos.y = gp.getMousePosition().y - offset;
+
+            gp.repaintNeeded = true;
             if(!mouseH.pressed){
                 isPickedUp = false;
                 gp.isGlobalPickedUp = false;
                 gridSnap();
+                //gp.repaintNeeded = true;
+                grid.currentUsedStacks();
+            }
+        }
+    }
+    public boolean shitsFucked(){ //just for testing
+        return pos == null;
+    }
+
+    public void gridSnap(){
+        currentGridPosX = grid.translate().x;
+        currentGridPosY = grid.translate().y;
+        pos.x = currentGridPosX * gp.tileSize;
+        pos.y = currentGridPosY * gp.tileSize;
+        grid.setGridArray(this);
+    }
+    public void initialGridSnap(){
+        pos.x = grid.independentTranslate(this).x * gp.tileSize;
+        pos.y = grid.independentTranslate(this).y * gp.tileSize;
+        grid.setInitialGridArray(this);
+    }
+
+    public boolean isSelected(){
+            return gp.getMousePosition().x >= pos.x && gp.getMousePosition().y >= pos.y && gp.getMousePosition().x <= pos.x + gp.tileSize && gp.getMousePosition().y <= pos.y + gp.tileSize && isAtTop();
+    }
+
+    public boolean isAtTop(){
+        if(!grid.gridArray[currentGridPosX][currentGridPosY].isEmpty()){
+            return this == grid.gridArray[currentGridPosX][currentGridPosY].peek();
+        }
+        return false;
+    }
+
+
+    public void setDefaultValues() {
+        for (int i = 0; i < gp.maxScreenColumns; i++) {
+            for (int j = 0; j < gp.maxScreenRows; j++) {
+                if (!grid.gridArray[i][j].isEmpty() && grid.gridArray[i][j].search(this) != -1) {
+                    pos.x = i * gp.tileSize;
+                    pos.y = j * gp.tileSize;
+
+                    currentGridPosX = i;
+                    currentGridPosY = j;
+
+                }
             }
         }
     }
 
-
-    public void gridSnap(){
-        pos.x = grid.translate().x * gp.tileSize;
-        pos.y = grid.translate().y * gp.tileSize;
-        grid.setGridArray(this);
+    public void saveStartingPos(){
+        this.startingGridPosX = this.currentGridPosX;
+        this.startingGridPosY = this.currentGridPosY;
     }
 
-    public boolean isSelected(){
-            return gp.getMousePosition().x >= pos.x && gp.getMousePosition().y >= pos.y && gp.getMousePosition().x <= pos.x + gp.tileSize && gp.getMousePosition().y <= pos.y + gp.tileSize;
+    public int getStartingGridPosX() {
+        return startingGridPosX;
     }
 
-    public void setDefaultValues() {
-        pos.x = 100;
-        pos.y = 100;
+    public int getStartingGridPosY() {
+        return startingGridPosY;
     }
 
     public void colorCard(){
@@ -79,5 +133,14 @@ public class Card extends Entity {
         g2.setColor(color);
 
         g2.fillRect(pos.x, pos.y , gp.tileSize, gp.tileSize);
+    }
+
+    public void pickedUpDraw(Graphics2D g2){
+
+        if(isPickedUp){
+            g2.setColor(color);
+
+            g2.fillRect(pos.x, pos.y , gp.tileSize, gp.tileSize);
+        }
     }
 }

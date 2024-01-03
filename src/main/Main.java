@@ -21,8 +21,9 @@ public class Main {
         //window.setUndecorated(true);
         window.setVisible(true);
 
+        gamePanel.startingCards();
         //mainThread.startMainThread();
         gamePanel.startGameThread();
-        grid.startGridThread();
+        //grid.startGridThread();
     }
 }
