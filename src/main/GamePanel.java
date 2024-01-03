@@ -64,12 +64,12 @@ public class GamePanel extends JPanel implements Runnable{
         grid.gridArray[1][1].add(card1);
         grid.gridArray[3][2].add(card2);
 
-        for(int i = 0; i < cardList.size(); i++){
-            cardList.get(i).colorCard();
-            cardList.get(i).setDefaultValues();
-            cardList.get(i).initialGridSnap();
-            cardList.get(i).saveStartingPos();
-            System.out.println(cardList.get(i).pos);
+        for (Card card : cardList) {
+            card.colorCard();
+            card.setDefaultValues();
+            card.initialGridSnap();
+            card.saveStartingPos();
+            System.out.println(card.pos);
         }
     }
 
@@ -127,8 +127,8 @@ public class GamePanel extends JPanel implements Runnable{
 
     public void update(){
         grid.ghostCardPrevention();
-        for(int i = 0; i < cardList.size(); i++){
-            cardList.get(i).update();
+        for (Card card : cardList) {
+            card.update();
         }
     }
 
