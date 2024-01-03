@@ -103,9 +103,9 @@ public class Grid /*implements Runnable*/ {
                 for(int l = 0; l < gp.cardList.size(); l++){
                     if (!gridArray[i][j].isEmpty() && gridArray[i][j].search(gp.cardList.get(l)) != -1) {
                         if(i != gp.cardList.get(l).getStartingGridPosX() && j != gp.cardList.get(l).getStartingGridPosY() || i == gp.cardList.get(l).getStartingGridPosX() && j != gp.cardList.get(l).getStartingGridPosY() || i != gp.cardList.get(l).getStartingGridPosX() && j == gp.cardList.get(l).getStartingGridPosY()){
-                            //if(gridArray[gp.cardList.get(l).getStartingGridPosX()][gp.cardList.get(l).getStartingGridPosY()].search(gp.cardList.get(l)) != -1){
+                            if(gridArray[gp.cardList.get(l).getStartingGridPosX()][gp.cardList.get(l).getStartingGridPosY()].search(gp.cardList.get(l)) != -1){
                                 gridArray[gp.cardList.get(l).getStartingGridPosX()][gp.cardList.get(l).getStartingGridPosY()].remove( gp.cardList.get(l));
-                            //}
+                            }
                         }
                     }
                 }

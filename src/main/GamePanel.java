@@ -121,7 +121,7 @@ public class GamePanel extends JPanel implements Runnable{
         for(int i = 0; i < cardList.size(); i++){
             cardList.get(i).update();
         }
-        grid.ghostCardPrevention();
+
     }
 
     public void paintComponent(Graphics g){

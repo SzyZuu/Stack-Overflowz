@@ -40,7 +40,6 @@ public class Card extends Entity {
     public void pickUp(){
         if(!gp.isGlobalPickedUp && !shitsFucked()){
             if (mouseH.pressed && isSelected()) {
-                //grid.gridArray[grid.independentTranslate(this).x][grid.independentTranslate(this).y].peek().
                 isPickedUp = true;
                 gp.isGlobalPickedUp = true;
                 grid.clearGridArraySlot(this);
