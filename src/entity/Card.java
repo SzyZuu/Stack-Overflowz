@@ -23,14 +23,15 @@ public class Card extends Entity {
     int currentGridPosY;
     int startingGridPosX;
     int startingGridPosY;
-
+    int id;
     Color color;
 
-    public Card(GamePanel gp, KeyHandler keyH, MouseHandler mouseH, Grid g){
+    public Card(GamePanel gp, KeyHandler keyH, MouseHandler mouseH, Grid g, int CardId){
         this.gp = gp;
         this.keyH = keyH;
         this.mouseH = mouseH;
         this. grid = g;
+        this.id = CardId;
         //setDefaultValues();
         //initialGridSnap();
         offsetMath = (float) gp.tileSize / 2;
@@ -119,11 +120,32 @@ public class Card extends Entity {
     }
 
     public void colorCard(){
-        Random rand = new Random();
-        float r = rand.nextFloat();
-        float g = rand.nextFloat();
-        float b = rand.nextFloat();
-        color = new Color(r, g, b);
+        switch(id){
+            case 1:                     //Villager
+                color = Color.WHITE;
+                break;
+            case 2:                     //Wood
+                color = new Color(88, 57, 39);
+                break;
+            case 3:                     //Stone
+                color = Color.GRAY;
+                break;
+            case 4:                     //Tree
+                color = new Color(34, 139, 34);
+                break;
+            case 5:                     //Boulder
+                color = Color.DARK_GRAY;
+                break;
+            case 6:                     //Plank
+                color = new Color(222, 184, 135);
+                break;
+            case 7:                     //Brick
+                color = new Color(165, 42, 42);
+                break;
+            default:
+                color = Color.MAGENTA;
+                break;
+        }
     }
 
     public void update(){

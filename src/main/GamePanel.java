@@ -31,8 +31,8 @@ public class GamePanel extends JPanel implements Runnable{
     public boolean isGlobalPickedUp = false;
     public boolean repaintNeeded = true;
     ArrayList<Card> cardList = new ArrayList<Card>();
-    Card card1 = new Card(this, keyH, mouseH, grid);
-    Card card2 = new Card(this, keyH, mouseH, grid);
+    Card card1 = new Card(this, keyH, mouseH, grid, 1);
+    Card card2 = new Card(this, keyH, mouseH, grid, 123);
 
     //MainThread mainThread = new MainThread( this, grid);
 
