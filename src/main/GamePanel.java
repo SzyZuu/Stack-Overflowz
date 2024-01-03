@@ -5,6 +5,7 @@ import entity.Card;
 import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Stack;
 
 
@@ -25,8 +26,9 @@ public class GamePanel extends JPanel implements Runnable{
     int FPS = 60;
     KeyHandler keyH = new KeyHandler();
     MouseHandler mouseH = new MouseHandler();
+    CraftingHandler craftingH = new CraftingHandler();
     Grid grid = new Grid(this);
-
+    private List<CraftingListener> craftingListeners = new ArrayList<CraftingListener>();
     Thread gameThread;
     public boolean isGlobalPickedUp = false;
     public boolean repaintNeeded = true;
@@ -43,6 +45,11 @@ public class GamePanel extends JPanel implements Runnable{
         this.addKeyListener(keyH);
         this.setFocusable(true);
         this.addMouseListener(mouseH);
+        this.addListener(craftingH);
+    }
+
+    public void addListener(CraftingListener addCl){
+        craftingListeners.add(addCl);
     }
 
     public void startGameThread() {
@@ -113,15 +120,16 @@ public class GamePanel extends JPanel implements Runnable{
         }
     }
 
-
-
+    public void checkAndCraft(){
+        for(CraftingListener cl : craftingListeners)
+            cl.doCraft();
+    }
 
     public void update(){
         grid.ghostCardPrevention();
         for(int i = 0; i < cardList.size(); i++){
             cardList.get(i).update();
         }
-
     }
 
     public void paintComponent(Graphics g){

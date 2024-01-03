@@ -5,8 +5,6 @@ import main.Grid;
 import main.KeyHandler;
 import main.MouseHandler;
 import java.awt.*;
-import java.util.Random;
-import java.util.Stack;
 
 public class Card extends Entity {
     GamePanel gp;
@@ -32,8 +30,6 @@ public class Card extends Entity {
         this.mouseH = mouseH;
         this. grid = g;
         this.id = CardId;
-        //setDefaultValues();
-        //initialGridSnap();
         offsetMath = (float) gp.tileSize / 2;
         offset = Math.round(offsetMath);
     }
@@ -143,7 +139,7 @@ public class Card extends Entity {
                 color = new Color(165, 42, 42);
                 break;
             default:
-                color = Color.MAGENTA;
+                color = Color.MAGENTA;  // mega-manta
                 break;
         }
     }
