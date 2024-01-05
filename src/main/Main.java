@@ -25,5 +25,8 @@ public class Main {
         //mainThread.startMainThread();
         gamePanel.startGameThread();
         //grid.startGridThread();
+
+        Recipes r = new Recipes();
+        r.readRecipes();
     }
 }
