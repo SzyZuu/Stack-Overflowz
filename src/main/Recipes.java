@@ -26,12 +26,13 @@ public class Recipes {
                     .filter(path-> path.getFileName().toString().endsWith(".json")) // fetch only the files which are ending with .JSON
                     .collect(Collectors.toList());
             for(Path path : paths) {
-                System.out.println(path);
+                System.out.println(path);           //temp debug
                 try {
-                    JSONObject jsonObject = (JSONObject) jsonParser.parse(new FileReader(path.toString()));          //read files
-                    System.out.println(jsonObject.get("firstID"));                                                                          //temp debug
+                    JSONObject jsonObject = (JSONObject) jsonParser.parse(new FileReader(path.toString()));    //read files
+                    System.out.println(jsonObject.get("firstID"));                               //temp debug
+                    recipe[Integer.parseInt(jsonObject.get("firstID").toString())][Integer.parseInt(jsonObject.get("secondID").toString())] = Integer.parseInt(jsonObject.get("resultID").toString());
                 } catch (ParseException | IOException e){
-                    e.printStackTrace();                                                                                                    //error handling ig
+                    e.printStackTrace();                                             //error handling ig
                 }
             }
         }catch (Exception e) {
