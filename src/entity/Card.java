@@ -21,7 +21,7 @@ public class Card extends Entity {
     int currentGridPosY;
     int startingGridPosX;
     int startingGridPosY;
-    int id;
+    public int id;
     Color color;
 
     public Card(GamePanel gp, KeyHandler keyH, MouseHandler mouseH, Grid g, int CardId){

@@ -26,7 +26,8 @@ public class GamePanel extends JPanel implements Runnable{
     int FPS = 60;
     KeyHandler keyH = new KeyHandler();
     MouseHandler mouseH = new MouseHandler();
-    CraftingHandler craftingH = new CraftingHandler();
+    Recipes recipes = new Recipes();
+    CraftingHandler craftingH = new CraftingHandler(recipes, this);
     Grid grid = new Grid(this);
     private List<CraftingListener> craftingListeners = new ArrayList<CraftingListener>();
     Thread gameThread;
@@ -36,7 +37,7 @@ public class GamePanel extends JPanel implements Runnable{
     public boolean stackBiggerThen1 = false;
     int safetyDefault = -1;
     int checkedGridSlotX = safetyDefault;      //-1 as default empty
-    int checkedGridSlotY =safetyDefault;
+    int checkedGridSlotY = safetyDefault;
     Card heldForCraft1;
     Card heldForCraft2;
 
@@ -87,8 +88,7 @@ public class GamePanel extends JPanel implements Runnable{
         double drawInterval = (double) 1000000000 / FPS ; // 0.0166 seconds
         double nextDrawTime = System.nanoTime() + drawInterval;
 
-
-
+        recipes.readRecipes();
 
         while (gameThread != null){
             // 1 UPDATE: update information such as character positions
@@ -151,23 +151,23 @@ public class GamePanel extends JPanel implements Runnable{
         if(!grid.gridArray[checkedGridSlotX][checkedGridSlotY].empty() && grid.gridArray[checkedGridSlotX][checkedGridSlotY].size() >1 ){
             heldForCraft1 = grid.gridArray[checkedGridSlotX][checkedGridSlotY].pop();
             heldForCraft2 = grid.gridArray[checkedGridSlotX][checkedGridSlotY].pop();
+            checkAndCraft(heldForCraft1, heldForCraft2);
         }
 
         checkedGridSlotX= safetyDefault;
         checkedGridSlotY = safetyDefault;
     }
 
-    public void noValidRecipie(){
+    public void noValidRecipe(){
         grid.gridArray[checkedGridSlotX][checkedGridSlotY].push(heldForCraft2);
         heldForCraft2 = null;
         grid.gridArray[checkedGridSlotX][checkedGridSlotY].push(heldForCraft1);
         heldForCraft1 = null;
-
     }
 
     public void checkAndCraft(Card c1, Card c2){
         for(CraftingListener cl : craftingListeners)
-            cl.doCraft();
+            cl.doCraft(c1, c2);
     }
 
     public void update(){
@@ -185,7 +185,7 @@ public class GamePanel extends JPanel implements Runnable{
 
         Graphics2D g2 = (Graphics2D)g;      //ensures that the graphics are 2d
 
-        sequencedDraw(g2);
+        sequencedDraw(g2);                  //draw only first card in the stack
         for (Card card : cardList) {
             card.pickedUpDraw(g2);
         }

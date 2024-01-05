@@ -16,6 +16,11 @@ public class Recipes {
 
     int recipe[][] = new int[7][7];         //for now always set to the highest ID
     public void readRecipes() {
+        for(int i = 0; i < 7; i++){         //default to zero
+            for(int a = 0; i < 7; i++){
+                recipe[i][a] = 0;
+            }
+        }
         JSONParser jsonParser = new JSONParser();               //initialize parser
 
         String dir =System.getProperty("user.dir")+"/res/crafting";
