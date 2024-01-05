@@ -32,6 +32,14 @@ public class GamePanel extends JPanel implements Runnable{
     Thread gameThread;
     public boolean isGlobalPickedUp = false;
     public boolean repaintNeeded = true;
+    public boolean cardHasBeenStacked = false;
+    public boolean stackBiggerThen1 = false;
+    int safetyDefault = -1;
+    int checkedGridSlotX = safetyDefault;      //-1 as default empty
+    int checkedGridSlotY =safetyDefault;
+    Card heldForCraft1;
+    Card heldForCraft2;
+
     ArrayList<Card> cardList = new ArrayList<Card>();
     Card card1 = new Card(this, keyH, mouseH, grid, 1);
     Card card2 = new Card(this, keyH, mouseH, grid, 123);
@@ -106,7 +114,6 @@ public class GamePanel extends JPanel implements Runnable{
 
         }
     }
-
     public void sequencedDraw(Graphics2D g2) {
         if (repaintNeeded) {
             for (Stack<Card>[] row : grid.gridArray) {
@@ -119,6 +126,44 @@ public class GamePanel extends JPanel implements Runnable{
             //repaintNeeded = false;
         }
     }
+    public void stackCheck(){
+        if(cardHasBeenStacked && stackBiggerThen1){
+
+            if(checkedGridSlotX != -1 && checkedGridSlotY != -1) {
+                grabCards();
+            }
+            cardHasBeenStacked = false;
+            
+        }
+        else cardHasBeenStacked = false;
+    }
+
+    public void stackSizeChecker(int GPX, int GPY){
+       if (grid.gridArray[GPX][GPY].size() > 1) {
+           checkedGridSlotX = GPX;
+           checkedGridSlotY = GPY;
+           stackBiggerThen1 = true;
+       }
+       else stackBiggerThen1 = false;
+   }
+
+    public void grabCards(){
+        if(!grid.gridArray[checkedGridSlotX][checkedGridSlotY].empty() && grid.gridArray[checkedGridSlotX][checkedGridSlotY].size() >1 ){
+            heldForCraft1 = grid.gridArray[checkedGridSlotX][checkedGridSlotY].pop();
+            heldForCraft2 = grid.gridArray[checkedGridSlotX][checkedGridSlotY].pop();
+        }
+
+        checkedGridSlotX= safetyDefault;
+        checkedGridSlotY = safetyDefault;
+    }
+
+    public void noValidRecipie(){
+        grid.gridArray[checkedGridSlotX][checkedGridSlotY].push(heldForCraft2);
+        heldForCraft2 = null;
+        grid.gridArray[checkedGridSlotX][checkedGridSlotY].push(heldForCraft1);
+        heldForCraft1 = null;
+
+    }
 
     public void checkAndCraft(Card c1, Card c2){
         for(CraftingListener cl : craftingListeners)
@@ -130,6 +175,8 @@ public class GamePanel extends JPanel implements Runnable{
         for (Card card : cardList) {
             card.update();
         }
+        stackCheck();
+
     }
 
     public void paintComponent(Graphics g){
