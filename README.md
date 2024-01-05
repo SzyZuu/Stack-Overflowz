@@ -2,6 +2,8 @@
 
 ![yesagain](https://img.shields.io/badge/Best_Project-2023-green)
 
+![yesagainn](https://img.shields.io/badge/Best_Project-2024-green)
+
 ![yesagainz](https://img.shields.io/badge/Super-Original-yellow)
 
 
