@@ -11,7 +11,6 @@ public class Main {
         window.setTitle("Stack Overflowz");
 
         GamePanel gamePanel = new GamePanel();
-        Grid grid = new Grid(gamePanel);
         //MainThread mainThread = new MainThread(gamePanel, grid);
 
         window.add(gamePanel);

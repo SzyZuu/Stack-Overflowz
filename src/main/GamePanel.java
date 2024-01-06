@@ -176,7 +176,6 @@ public class GamePanel extends JPanel implements Runnable{
             card.update();
         }
         stackCheck();
-
     }
 
     public void paintComponent(Graphics g){
