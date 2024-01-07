@@ -14,10 +14,13 @@ import java.util.stream.Collectors;
 
 public class Recipes {
 
-    int recipe[][] = new int[7][7];         //for now always set to the highest ID
+    int currentlyUsedCardIds = 7;
+    int calcCardIds = currentlyUsedCardIds +1;                  // +1, cos otherwise it'll break
+    int recipe[][] = new int[calcCardIds][calcCardIds];         //for now always set to the highest ID
+
     public void readRecipes() {
-        for(int i = 0; i < 7; i++){         //default to zero
-            for(int a = 0; i < 7; i++){
+        for(int i = 0; i < calcCardIds; i++){                    //default to zero
+            for(int a = 0; i < calcCardIds; i++){
                 recipe[i][a] = 0;
             }
         }

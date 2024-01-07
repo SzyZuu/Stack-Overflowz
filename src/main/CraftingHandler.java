@@ -8,11 +8,15 @@ public class CraftingHandler implements CraftingListener{
     GamePanel gp;
     @Override
     public void doCraft(Card card1, Card card2) {
-        if(r.recipe[card1.id][card2.id] != 0){
-            //spawn the card; spawning method needed
+        if(card1.id < r.calcCardIds && card2.id <r.calcCardIds){
+            if(r.recipe[card1.id][card2.id] != 0){
+                //spawn the card; spawning method needed
+            }else {
+                gp.noValidRecipe();
+            }
         }else {
-            gp.noValidRecipe();
-        }
+        gp.noValidRecipe();
+    }
     }
 
     public CraftingHandler(Recipes r, GamePanel gp){

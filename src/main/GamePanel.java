@@ -43,7 +43,7 @@ public class GamePanel extends JPanel implements Runnable{
 
     ArrayList<Card> cardList = new ArrayList<Card>();
     Card card1 = new Card(this, keyH, mouseH, grid, 1);
-    Card card2 = new Card(this, keyH, mouseH, grid, 123);
+    Card card2 = new Card(this, keyH, mouseH, grid, 2);
 
     //MainThread mainThread = new MainThread( this, grid);
 
