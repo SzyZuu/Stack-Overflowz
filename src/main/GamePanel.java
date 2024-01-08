@@ -182,12 +182,30 @@ public class GamePanel extends JPanel implements Runnable{
         checkedGridSlotY = safetyDefault;
     }
 
-    public void returnCards(){                                                  //formerly no valid recipes
-        grid.gridArray[returnSlotX][returnSlotY].push(heldForCraft2);
-        heldForCraft2 = null;
-        grid.gridArray[returnSlotX][returnSlotY].push(heldForCraft1);
-        heldForCraft1 = null;
+    public void returnCards(Card cx) {                                                  //formerly no valid recipes
+
+        grid.gridArray[returnSlotX][returnSlotY].push(cx);
+
+        if (heldForCraft1 == cx) {
+            heldForCraft1 = null;
+        }
+        else if (heldForCraft2 == cx) {
+            heldForCraft2 = null;
+        }
     }
+
+    public void deleteCard(Card cx) {
+
+        cardList.remove(cx); // if this is possible like with stacks, otherwise for loop or
+
+        if (heldForCraft1 == cx) {
+            heldForCraft1 = null;
+        }
+        else if (heldForCraft2 == cx) {
+            heldForCraft2 = null;
+        }
+    }
+
 
     public void checkAndCraft(Card c1, Card c2){
         for(CraftingListener cl : craftingListeners)

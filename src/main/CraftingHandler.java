@@ -14,17 +14,21 @@ public class CraftingHandler implements CraftingListener{
                 switch (r.recipe[card1.id][card2.id]){
                     case 3: // result Id
                         gp.spawnNewCard(3);
-                        gp.returnCards();
+                        gp.returnCards(card2);
+                        gp.returnCards(card1);
                         break;
                     default:
-                        gp.returnCards();
+                        gp.returnCards(card2);
+                        gp.returnCards(card1);
                         break;
                 }
             }else {
-                gp.returnCards();
+                gp.returnCards(card2);
+                gp.returnCards(card1);
             }
         }else {
-        gp.returnCards();
+            gp.returnCards(card2);
+            gp.returnCards(card1);
     }
     }
 
