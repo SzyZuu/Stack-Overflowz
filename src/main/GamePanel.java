@@ -38,6 +38,8 @@ public class GamePanel extends JPanel implements Runnable{
     int safetyDefault = -1;
     int checkedGridSlotX = safetyDefault;      //-1 as default empty
     int checkedGridSlotY = safetyDefault;
+    int returnSlotX = 0;
+    int returnSlotY = 0;
     Card heldForCraft1;
     Card heldForCraft2;
 
@@ -80,6 +82,17 @@ public class GamePanel extends JPanel implements Runnable{
             card.saveStartingPos();
             System.out.println(card.pos);
         }
+    }
+    public void spawnNewCard(int id){
+
+        Card cardZ = new Card(this, keyH, mouseH, grid, id);
+        cardList.add(cardZ);
+        grid.gridArray[0][0].add(cardZ);
+        cardZ.colorCard();
+        cardZ.setDefaultValues();
+        cardZ.initialGridSnap();
+        cardZ.saveStartingPos();
+        System.out.println(cardZ.pos);
     }
 
     @Override
@@ -139,18 +152,29 @@ public class GamePanel extends JPanel implements Runnable{
     }
 
     public void stackSizeChecker(int GPX, int GPY){
-       if (grid.gridArray[GPX][GPY].size() > 1) {
+       if (grid.gridArray[GPX][GPY].size() > 1 && !isSpawningTile(GPX, GPY)) {
            checkedGridSlotX = GPX;
            checkedGridSlotY = GPY;
            stackBiggerThen1 = true;
        }
        else stackBiggerThen1 = false;
    }
+   public boolean isSpawningTile( int GPX, int GPY){
+
+        if(GPX != 0 && GPY != 0 || GPX == 0 && GPY != 0 || GPX != 0 && GPY == 0){
+            return false;
+        }
+        else{
+            return true;
+        }
+   }
 
     public void grabCards(){
-        if(!grid.gridArray[checkedGridSlotX][checkedGridSlotY].empty() && grid.gridArray[checkedGridSlotX][checkedGridSlotY].size() >1 ){
+        if(!grid.gridArray[checkedGridSlotX][checkedGridSlotY].empty() && grid.gridArray[checkedGridSlotX][checkedGridSlotY].size() >1 && !isSpawningTile(checkedGridSlotX, checkedGridSlotY)){
             heldForCraft1 = grid.gridArray[checkedGridSlotX][checkedGridSlotY].pop();
             heldForCraft2 = grid.gridArray[checkedGridSlotX][checkedGridSlotY].pop();
+            returnSlotX = checkedGridSlotX;
+            returnSlotY = checkedGridSlotY;
             checkAndCraft(heldForCraft1, heldForCraft2);
         }
 
@@ -158,12 +182,30 @@ public class GamePanel extends JPanel implements Runnable{
         checkedGridSlotY = safetyDefault;
     }
 
-    public void noValidRecipe(){
-        grid.gridArray[checkedGridSlotX][checkedGridSlotY].push(heldForCraft2);
-        heldForCraft2 = null;
-        grid.gridArray[checkedGridSlotX][checkedGridSlotY].push(heldForCraft1);
-        heldForCraft1 = null;
+    public void returnCards(Card cx) {                                                  //formerly no valid recipes
+
+        grid.gridArray[returnSlotX][returnSlotY].push(cx);
+
+        if (heldForCraft1 == cx) {
+            heldForCraft1 = null;
+        }
+        else if (heldForCraft2 == cx) {
+            heldForCraft2 = null;
+        }
     }
+
+    public void deleteCard(Card cx) {
+
+        cardList.remove(cx); // if this is possible like with stacks, otherwise for loop or
+
+        if (heldForCraft1 == cx) {
+            heldForCraft1 = null;
+        }
+        else if (heldForCraft2 == cx) {
+            heldForCraft2 = null;
+        }
+    }
+
 
     public void checkAndCraft(Card c1, Card c2){
         for(CraftingListener cl : craftingListeners)
