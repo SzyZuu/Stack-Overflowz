@@ -61,3 +61,5 @@
  - flexxx again
  - new issues, more planning
  - closed issues
+ 11.01.2024
+ - added gradle integration
