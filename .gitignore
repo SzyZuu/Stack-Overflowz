@@ -24,7 +24,7 @@ bin/
 
 ### VS Code ###
 .vscode/
-./.idea
+.idea/
 ### Mac OS ###
 .DS_Store
 
@@ -43,3 +43,4 @@ gradle-app.setting
 
 # Cache of project
 .gradletasknamecache
+/.idea/
