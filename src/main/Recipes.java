@@ -20,13 +20,13 @@ public class Recipes {
 
     public void readRecipes() {
         for(int i = 0; i < calcCardIds; i++){                    //default to zero
-            for(int a = 0; i < calcCardIds; i++){
+            for(int a = 0; a < calcCardIds; a++){
                 recipe[i][a] = 0;
             }
         }
         JSONParser jsonParser = new JSONParser();               //initialize parser
 
-        String dir =System.getProperty("user.dir")+"/res/crafting";
+        String dir = Paths.get("res", "crafting").toString();
 
         try{
             List<Path> paths = Files.walk(Paths.get(dir),1) //by mentioning max depth as 1 it will only traverse immediate level

@@ -1,9 +1,13 @@
 plugins {
     id 'java'
+    id 'com.github.johnrengelman.shadow' version '8.1.1'
 }
 
-group 'org.example'
-version '1.0-SNAPSHOT'
+apply plugin: 'com.github.johnrengelman.shadow'
+apply plugin: 'java'
+
+group 'com.szyzuprotecc'
+version '0.5.1'
 
 repositories {
     mavenCentral()
@@ -15,7 +19,19 @@ sourceSets {
         }
     }
 }
+
+jar {
+    manifest {
+        attributes 'Main-Class': 'main.Main'
+    }
+}
+
+shadowJar {
+    archiveBaseName.set('shadow')
+    archiveClassifier.set('')
+    archiveVersion.set('')
+}
 dependencies {
     implementation 'com.googlecode.json-simple:json-simple:1.1.1'
-    implementation 'junit:junit:4.12'
+    implementation 'junit:junit:4.13.1'
 }
