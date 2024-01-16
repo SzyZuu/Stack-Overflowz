@@ -6,6 +6,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 import java.util.Stack;
 
 
@@ -20,11 +21,11 @@ public class GamePanel extends JPanel implements Runnable{
     public final int maxScreenColumns = 16; // Grid Size Horizontal
     public final int maxScreenRows = 12;   //Grid Size Vertical
 
-    final int screenWidth = maxScreenColumns * tileSize; // 1024 Px
-    final int screenHeight = maxScreenRows * tileSize;  // 768 Px
+    public final int screenWidth = maxScreenColumns * tileSize; // 1024 Px
+    public final int screenHeight = maxScreenRows * tileSize;  // 768 Px
     //FPS
     int FPS = 60;
-    KeyHandler keyH = new KeyHandler();
+    KeyHandler keyH = new KeyHandler(this);
     MouseHandler mouseH = new MouseHandler();
     Recipes recipes = new Recipes();
     CraftingHandler craftingH = new CraftingHandler(recipes, this);
@@ -45,7 +46,8 @@ public class GamePanel extends JPanel implements Runnable{
 
     int sellingSlotX = 15; //16-1
     int sellingSlotY = 0;
-    int coins = 0;
+    int coins = 5;
+    int packAmount = 3;
     Card heldForCraft1;
     Card heldForCraft2;
 
@@ -228,6 +230,16 @@ public class GamePanel extends JPanel implements Runnable{
         }
         else if (heldForCraft2 == card) {
             heldForCraft2 = null;
+        }
+    }
+
+    public void buyCard(){
+        if(coins >= 5){
+            Random r = new Random();
+            coins -= 5;
+            for(int i = 0; i < packAmount; i++ ){
+                spawnNewCard(r.nextInt(2) + 2);
+            }
         }
     }
 

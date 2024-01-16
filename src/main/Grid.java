@@ -52,6 +52,10 @@ public class Grid /*implements Runnable*/ {
         if(currentNearestGrid() != null ) {
             transPoint.x = gp.maxScreenColumns - currentNearestGrid().x;
             transPoint.y = gp.maxScreenRows - currentNearestGrid().y;
+            if(transPoint.x >= gp.maxScreenColumns || transPoint.y >= gp.maxScreenRows){
+                transPoint.x = 0;
+                transPoint.y = 0;
+            }
             return transPoint;
 
         }
