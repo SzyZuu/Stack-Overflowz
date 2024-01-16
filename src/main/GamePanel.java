@@ -108,6 +108,7 @@ public class GamePanel extends JPanel implements Runnable{
         double nextDrawTime = System.nanoTime() + drawInterval;
 
         recipes.readRecipes();
+        grid.ghostCardPrevention();
 
         while (gameThread != null){
             // 1 UPDATE: update information such as character positions
