@@ -63,3 +63,11 @@
  - closed issues
  11.01.2024
  - added gradle integration
+ Weeks ?+3
+ 15.01.2024
+ - card selling
+ - coins
+ - coin counter
+ - selling tile
+ - selling and spawning tile visualisation
+ - issue creation

@@ -40,10 +40,16 @@ public class GamePanel extends JPanel implements Runnable{
     int checkedGridSlotY = safetyDefault;
     int returnSlotX = 0;
     int returnSlotY = 0;
+    int spawningSlotX = 0;
+    int spawningSlotY = 0;
+
+    int sellingSlotX = 15; //16-1
+    int sellingSlotY = 0;
+    int coins = 0;
     Card heldForCraft1;
     Card heldForCraft2;
 
-    ArrayList<Card> cardList = new ArrayList<Card>();
+    public ArrayList<Card> cardList = new ArrayList<Card>();
     Card card1 = new Card(this, keyH, mouseH, grid, 1);
     Card card2 = new Card(this, keyH, mouseH, grid, 2);
 
@@ -151,17 +157,25 @@ public class GamePanel extends JPanel implements Runnable{
         else cardHasBeenStacked = false;
     }
 
-    public void stackSizeChecker(int GPX, int GPY){
-       if (grid.gridArray[GPX][GPY].size() > 1 && !isSpawningTile(GPX, GPY)) {
-           checkedGridSlotX = GPX;
-           checkedGridSlotY = GPY;
+    public void sellStack(){
+        if(!grid.gridArray[sellingSlotX][sellingSlotY].empty()){
+            grid.ghostCardPrevention();
+            cardList.remove(grid.gridArray[sellingSlotX][sellingSlotY].pop());
+             coins++;
+        }
+    }
+
+    public void stackSizeChecker(int gridPosX, int gridPosY){
+       if (grid.gridArray[gridPosX][gridPosY].size() > 1 && !isSpawningTile(gridPosX, gridPosY)) {
+           checkedGridSlotX = gridPosX;
+           checkedGridSlotY = gridPosY;
            stackBiggerThen1 = true;
        }
        else stackBiggerThen1 = false;
    }
-   public boolean isSpawningTile( int GPX, int GPY){
+   public boolean isSpawningTile( int gridPosX, int gridPosY){
 
-        if(GPX != 0 && GPY != 0 || GPX == 0 && GPY != 0 || GPX != 0 && GPY == 0){
+        if(gridPosX != spawningSlotX && gridPosY != spawningSlotY || gridPosX == spawningSlotX && gridPosY != spawningSlotY || gridPosX != spawningSlotX && gridPosY == spawningSlotY){
             return false;
         }
         else{
@@ -169,8 +183,18 @@ public class GamePanel extends JPanel implements Runnable{
         }
    }
 
+    public boolean isSellingTile( int gridPointX, int gridPointY){  // nolonger in use, if it'll be kept is a question for the future
+
+        if(gridPointX != sellingSlotX && gridPointY != sellingSlotY || gridPointX == sellingSlotX && gridPointY != sellingSlotY || gridPointX != sellingSlotX && gridPointY == sellingSlotY){
+            return false;
+        }
+        else{
+            return true;
+        }
+    }
+
     public void grabCards(){
-        if(!grid.gridArray[checkedGridSlotX][checkedGridSlotY].empty() && grid.gridArray[checkedGridSlotX][checkedGridSlotY].size() >1 && !isSpawningTile(checkedGridSlotX, checkedGridSlotY)){
+        if(!grid.gridArray[checkedGridSlotX][checkedGridSlotY].empty() && grid.gridArray[checkedGridSlotX][checkedGridSlotY].size() >1 && !isSpawningTile(checkedGridSlotX, checkedGridSlotY) ){ //&& !isSellingTile(checkedGridSlotX, checkedGridSlotY)
             heldForCraft1 = grid.gridArray[checkedGridSlotX][checkedGridSlotY].pop();
             heldForCraft2 = grid.gridArray[checkedGridSlotX][checkedGridSlotY].pop();
             returnSlotX = checkedGridSlotX;
@@ -194,18 +218,17 @@ public class GamePanel extends JPanel implements Runnable{
         }
     }
 
-    public void deleteCard(Card cx) {
+    public void deleteCard(Card card) {     // not in use yet
 
-        cardList.remove(cx); // if this is possible like with stacks, otherwise for loop or
+        cardList.remove(card); // if this is possible like with stacks, otherwise for loop or
 
-        if (heldForCraft1 == cx) {
+        if (heldForCraft1 == card) {
             heldForCraft1 = null;
         }
-        else if (heldForCraft2 == cx) {
+        else if (heldForCraft2 == card) {
             heldForCraft2 = null;
         }
     }
-
 
     public void checkAndCraft(Card c1, Card c2){
         for(CraftingListener cl : craftingListeners)
@@ -218,6 +241,14 @@ public class GamePanel extends JPanel implements Runnable{
             card.update();
         }
         stackCheck();
+        sellStack();
+    }
+    public void tileMarkings(Graphics2D g2){
+        g2.setColor(Color.RED);
+        g2.drawRect(sellingSlotX *tileSize, sellingSlotY *tileSize, tileSize, tileSize);
+        g2.setColor(Color.GRAY);
+        g2.drawRect(spawningSlotX *tileSize, spawningSlotY *tileSize, tileSize, tileSize);
+
     }
 
     public void paintComponent(Graphics g){
@@ -226,13 +257,16 @@ public class GamePanel extends JPanel implements Runnable{
 
         Graphics2D g2 = (Graphics2D)g;      //ensures that the graphics are 2d
 
+        tileMarkings(g2);
+
         sequencedDraw(g2);                  //draw only first card in the stack
         for (Card card : cardList) {
             card.pickedUpDraw(g2);
         }
 
         //g2.drawString("fortnite", screenWidth /2 - 10, screenHeight/ 2 - 3);      // secret :D
-
+        g2.setColor(Color.white);
+        g2.drawString("Coins " + coins, screenWidth /2 - 30,10); //y 10 appears to be the bare mimimum for the text to be readable
         g2.dispose();
     }
 }
