@@ -53,7 +53,8 @@ public class GamePanel extends JPanel implements Runnable{
 
     public ArrayList<Card> cardList = new ArrayList<Card>();
     Card card1 = new Card(this, keyH, mouseH, grid, 1);
-    Card card2 = new Card(this, keyH, mouseH, grid, 2);
+    Card card2 = new Card(this, keyH, mouseH, grid, 4);
+    Card card3 = new Card(this, keyH, mouseH, grid, 5);
 
     //MainThread mainThread = new MainThread( this, grid);
 
@@ -79,9 +80,11 @@ public class GamePanel extends JPanel implements Runnable{
     public void startingCards(){
         cardList.add(card1);
         cardList.add(card2);
+        cardList.add(card3);
 
         grid.gridArray[1][1].add(card1);
         grid.gridArray[3][2].add(card2);
+        grid.gridArray[3][6].add(card3);
 
         for (Card card : cardList) {
             card.colorCard();
