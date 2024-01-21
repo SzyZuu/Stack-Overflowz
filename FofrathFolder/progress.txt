@@ -71,3 +71,7 @@
  - selling tile
  - selling and spawning tile visualisation
  - issue creation
+ 21.01.2024
+ - crafting recipes
+ - houses
+ - villager mitosis

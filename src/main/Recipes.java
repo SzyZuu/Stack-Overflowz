@@ -14,7 +14,7 @@ import java.util.stream.Collectors;
 
 public class Recipes {
 
-    int currentlyUsedCardIds = 7;
+    int currentlyUsedCardIds = 9;
     int calcCardIds = currentlyUsedCardIds +1;                  // +1, cos otherwise it'll break
     int recipe[][] = new int[calcCardIds][calcCardIds];         //for now always set to the highest ID
 
