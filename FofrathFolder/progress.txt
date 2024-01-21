@@ -76,3 +76,4 @@
  - houses
  - villager mitosis
  - card reevaluation
+ - stack size visualiser

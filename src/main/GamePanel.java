@@ -48,6 +48,11 @@ public class GamePanel extends JPanel implements Runnable{
     int sellingSlotY = 0;
     int coins = 5;
     int packAmount = 3;
+
+    float offsetMath;
+    public int offset;
+
+
     Card heldForCraft1;
     Card heldForCraft2;
 
@@ -66,6 +71,9 @@ public class GamePanel extends JPanel implements Runnable{
         this.setFocusable(true);
         this.addMouseListener(mouseH);
         this.addListener(craftingH);
+
+        offsetMath = (float) tileSize / 2;
+        offset = Math.round(offsetMath);
     }
 
     public void addListener(CraftingListener addCl){
@@ -139,12 +147,16 @@ public class GamePanel extends JPanel implements Runnable{
 
         }
     }
+
+    // for (Stack<Card>[] row : grid.gridArray)
+    // for (Stack<Card> stack : row)
     public void sequencedDraw(Graphics2D g2) {
         if (repaintNeeded) {
-            for (Stack<Card>[] row : grid.gridArray) {
-                for (Stack<Card> stack : row) {
-                    if (!stack.isEmpty()) {
-                        stack.peek().draw(g2);
+            for (int colums = 0; colums < maxScreenColumns; colums++) {
+                for (int rows = 0; rows < maxScreenRows; rows++) {
+                    if (!grid.gridArray[colums][rows].isEmpty()) {
+                        grid.gridArray[colums][rows].peek().draw(g2);
+                        drawStackSize(g2, colums , rows );
                     }
                 }
             }
@@ -260,12 +272,24 @@ public class GamePanel extends JPanel implements Runnable{
         stackCheck();
         sellStack();
     }
+
     public void tileMarkings(Graphics2D g2){
         g2.setColor(Color.RED);
         g2.drawRect(sellingSlotX *tileSize, sellingSlotY *tileSize, tileSize, tileSize);
         g2.setColor(Color.GRAY);
         g2.drawRect(spawningSlotX *tileSize, spawningSlotY *tileSize, tileSize, tileSize);
 
+    }
+
+    public void drawStackSize(Graphics2D g2, int gridSlotX, int gridSlotY){
+        int size = grid.gridArray[gridSlotX][gridSlotY].size();
+        if(grid.gridArray[gridSlotX][gridSlotY].peek().id == 1){
+            g2.setColor(Color.black);
+        }
+        else{
+            g2.setColor(Color.white);
+        }
+        g2.drawString(String.valueOf(size), gridSlotX * tileSize + offset, gridSlotY * tileSize + offset );
     }
 
     public void paintComponent(Graphics g){

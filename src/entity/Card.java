@@ -14,8 +14,7 @@ public class Card extends Entity {
 
     boolean isPickedUp = false;
     //int offset = 32; //Math.round(gp.tileSize/2);
-    float offsetMath;
-    int offset;
+
 
     int currentGridPosX;
     int currentGridPosY;
@@ -31,8 +30,7 @@ public class Card extends Entity {
         this.mouseH = mouseH;
         this. grid = g;
         this.id = CardId;
-        offsetMath = (float) gp.tileSize / 2;
-        offset = Math.round(offsetMath);
+
     }
 
     public void pickUp(){
@@ -46,8 +44,8 @@ public class Card extends Entity {
         }
 
         if(isPickedUp){
-            pos.x = gp.getMousePosition().x - offset;
-            pos.y = gp.getMousePosition().y - offset;
+            pos.x = gp.getMousePosition().x - gp.offset;
+            pos.y = gp.getMousePosition().y - gp.offset;
 
             gp.repaintNeeded = true;
             if(!mouseH.pressed){
