@@ -140,6 +140,15 @@ public class Card extends Entity {
             case 7:                     //Brick
                 color = new Color(165, 42, 42);
                 break;
+            case 8:                     //House Materials
+                color = new Color(63, 77, 79);
+                break;
+            case 9:                     //House
+                color = new Color(39, 67, 88);
+                break;
+            case 10:                     //Used House
+                color = new Color(211, 74, 79);
+                break;
             default:
                 color = Color.MAGENTA;  // mega-manta
                 break;
