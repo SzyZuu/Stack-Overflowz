@@ -75,3 +75,4 @@
  - crafting recipes
  - houses
  - villager mitosis
+ - card reevaluation

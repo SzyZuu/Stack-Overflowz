@@ -21,6 +21,7 @@ public class Card extends Entity {
     int currentGridPosY;
     int startingGridPosX;
     int startingGridPosY;
+    public int value;
     public int id;
     Color color;
 
@@ -121,36 +122,47 @@ public class Card extends Entity {
         switch(id){
             case 1:                     //Villager
                 color = Color.WHITE;
+                value = 0; // selling slaves is bad, using isnt
                 break;
             case 2:                     //Wood
                 color = new Color(88, 57, 39);
+                value = 1;
                 break;
             case 3:                     //Stone
                 color = Color.GRAY;
+                value = 1;
                 break;
             case 4:                     //Tree
                 color = new Color(34, 139, 34);
+                value = 0;
                 break;
             case 5:                     //Boulder
                 color = Color.DARK_GRAY;
+                value = 0;
                 break;
             case 6:                     //Plank
                 color = new Color(222, 184, 135);
+                value = 2;
                 break;
             case 7:                     //Brick
                 color = new Color(165, 42, 42);
+                value = 2;
                 break;
             case 8:                     //House Materials
                 color = new Color(63, 77, 79);
+                value = 5;
                 break;
             case 9:                     //House
                 color = new Color(39, 67, 88);
+                value = 7;
                 break;
             case 10:                     //Used House
                 color = new Color(211, 74, 79);
+                value = 0;
                 break;
             default:
                 color = Color.MAGENTA;  // mega-manta
+                value = 69;
                 break;
         }
     }
