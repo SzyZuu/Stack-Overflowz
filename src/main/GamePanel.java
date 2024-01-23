@@ -177,7 +177,6 @@ public class GamePanel extends JPanel implements Runnable{
 
     public void sellStack(){
         if(!grid.gridArray[sellingSlotX][sellingSlotY].empty()){
-            grid.ghostCardPrevention();
             Card tempCard =grid.gridArray[sellingSlotX][sellingSlotY].pop();
             coins += tempCard.value;
             cardList.remove(tempCard);
