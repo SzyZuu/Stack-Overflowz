@@ -49,6 +49,7 @@ public class Card extends Entity {
 
             gp.repaintNeeded = true;
             if(!mouseH.pressed){
+                gp.sound.playSound("dropSound");
                 isPickedUp = false;
                 gp.isGlobalPickedUp = false;
                 gridSnap();
