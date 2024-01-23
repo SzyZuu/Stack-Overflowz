@@ -28,6 +28,7 @@ public class GamePanel extends JPanel implements Runnable{
     KeyHandler keyH = new KeyHandler(this);
     MouseHandler mouseH = new MouseHandler();
     Recipes recipes = new Recipes();
+    public Sound sound = new Sound();
     CraftingHandler craftingH = new CraftingHandler(recipes, this);
     Grid grid = new Grid(this);
     private List<CraftingListener> craftingListeners = new ArrayList<CraftingListener>();
@@ -180,6 +181,7 @@ public class GamePanel extends JPanel implements Runnable{
             Card tempCard =grid.gridArray[sellingSlotX][sellingSlotY].pop();
             coins += tempCard.value;
             cardList.remove(tempCard);
+            sound.playSound("sellSound");
         }
     }
 
@@ -250,6 +252,7 @@ public class GamePanel extends JPanel implements Runnable{
 
     public void buyCard(){
         if(coins >= 5){
+            sound.playSound("buySound");
             Random r = new Random();
             coins -= 5;
             for(int i = 0; i < packAmount; i++ ){
