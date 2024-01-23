@@ -30,10 +30,12 @@ public class Sound {
             default:
                 break;
         }
+        System.out.println(selectedSound.toString());
         try {
             Clip clip = AudioSystem.getClip();
             AudioInputStream ais = AudioSystem.getAudioInputStream(selectedSound);
             clip.open(ais);
+            clip.start();
         }catch (LineUnavailableException | UnsupportedAudioFileException | IOException e){
             e.printStackTrace();
         }
