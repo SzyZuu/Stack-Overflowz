@@ -16,6 +16,10 @@ sourceSets {
     }
 }
 
+java {
+    sourceCompatibility = '11'
+}
+
 application {
     // Specify the main class for your application
     mainClassName = 'main.Main'
