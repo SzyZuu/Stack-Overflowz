@@ -22,6 +22,7 @@ public class Card extends Entity {
     int startingGridPosY;
     public int value;
     public int id;
+    public int scoreValue;
     Color color;
 
     public Card(GamePanel gp, KeyHandler keyH, MouseHandler mouseH, Grid g, int CardId){
@@ -30,7 +31,6 @@ public class Card extends Entity {
         this.mouseH = mouseH;
         this. grid = g;
         this.id = CardId;
-
     }
 
     public void pickUp(){
@@ -122,10 +122,12 @@ public class Card extends Entity {
             case 1:                     //Villager
                 color = Color.WHITE;
                 value = 0; // selling slaves is bad, using isnt
+                scoreValue = 0;
                 break;
             case 2:                     //Wood
                 color = new Color(88, 57, 39);
                 value = 1;
+                scoreValue = 0;
                 break;
             case 3:                     //Stone
                 color = Color.GRAY;
@@ -134,34 +136,42 @@ public class Card extends Entity {
             case 4:                     //Tree
                 color = new Color(34, 139, 34);
                 value = 0;
+                scoreValue = 0;
                 break;
             case 5:                     //Boulder
                 color = Color.DARK_GRAY;
                 value = 0;
+                scoreValue = 0;
                 break;
             case 6:                     //Plank
                 color = new Color(222, 184, 135);
                 value = 2;
+                scoreValue = 5;
                 break;
             case 7:                     //Brick
                 color = new Color(165, 42, 42);
                 value = 2;
+                scoreValue = 5;
                 break;
             case 8:                     //House Materials
                 color = new Color(63, 77, 79);
                 value = 5;
+                scoreValue = 10;
                 break;
             case 9:                     //House
                 color = new Color(39, 67, 88);
                 value = 7;
+                scoreValue = 30;
                 break;
             case 10:                     //Used House
                 color = new Color(211, 74, 79);
                 value = 0;
+                scoreValue = 0;
                 break;
             default:
                 color = Color.MAGENTA;  // mega-manta
                 value = 69;
+                scoreValue = 0;
                 break;
         }
     }

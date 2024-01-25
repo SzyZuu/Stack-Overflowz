@@ -48,12 +48,13 @@ public class GamePanel extends JPanel implements Runnable{
     int sellingSlotX = 15; //16-1
     int sellingSlotY = 0;
     int coins = 5;
+    public int score = 0;
     int packAmount = 3;
 
     float offsetMath;
     public int offset;
 
-
+    Card newestCard;
     Card heldForCraft1;
     Card heldForCraft2;
 
@@ -108,11 +109,13 @@ public class GamePanel extends JPanel implements Runnable{
         Card cardZ = new Card(this, keyH, mouseH, grid, id);
         cardList.add(cardZ);
         grid.gridArray[0][0].add(cardZ);
+        newestCard = cardZ;
         cardZ.colorCard();
         cardZ.setDefaultValues();
         cardZ.initialGridSnap();
         cardZ.saveStartingPos();
         System.out.println(cardZ.pos);
+
     }
 
     @Override
@@ -310,6 +313,7 @@ public class GamePanel extends JPanel implements Runnable{
         //g2.drawString("fortnite", screenWidth /2 - 10, screenHeight/ 2 - 3);      // secret :D
         g2.setColor(Color.white);
         g2.drawString("Coins " + coins, screenWidth /2 - 30,10); //y 10 appears to be the bare mimimum for the text to be readable
+        g2.drawString("Score  " + score, screenWidth /2 - 30,screenHeight);
         g2.dispose();
     }
 }
