@@ -26,21 +26,25 @@ public class CraftingHandler implements CraftingListener{
                         gp.spawnNewCard(6);
                         gp.deleteCard(card2);
                         gp.returnCards(card1);
+                        gp.score += gp.newestCard.scoreValue;
                         break;
                     case 7:     //refine Stone
                         gp.spawnNewCard(7);
                         gp.deleteCard(card2);
                         gp.returnCards(card1);
+                        gp.score += gp.newestCard.scoreValue; // scorevalues are in card
                         break;
                     case 8:     //make housing material
                         gp.spawnNewCard(8);
                         gp.deleteCard(card2);
                         gp.deleteCard(card1);
+                        gp.score += gp.newestCard.scoreValue;
                         break;
                     case 9:     //make house
                         gp.spawnNewCard(9);
                         gp.deleteCard(card2);
                         gp.returnCards(card1);
+                        gp.score += gp.newestCard.scoreValue;
                         break;
                     case 10:    //villager duplication
                         gp.spawnNewCard(10);
