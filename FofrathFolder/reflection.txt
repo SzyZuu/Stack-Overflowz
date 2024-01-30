@@ -1,0 +1,8 @@
+Reflection (bright as the sun, just like this game)
+- didn't manage to achieve wanted end result; features like more complex card interactions or moving cards are missing (see idea.txt)
+- spent way too much time on small things, like recipes, which we had to change a bit in the end anyway because not all cards should
+  get deleted during crafting
+- ignored a shit ton of bugs, we managed to get on ark level with bugs
+- no graphics (F)
+- very hepi that we managed to do basic card interactions at least
+- was really fun working continuously on a "bigger" project with more than 1 participant
