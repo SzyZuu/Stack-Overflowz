@@ -82,4 +82,7 @@
  - score has been implemented
  - almost all issues besides bugs have been closed
  - game now officially is playable (ignoring bugs)
- -
+ Week ? + 4
+ 30.01.2024
+ - tutorial finished
+ - changed spawn locations of initial cards
