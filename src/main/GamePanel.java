@@ -92,11 +92,12 @@ public class GamePanel extends JPanel implements Runnable{
         cardList.add(card2);
         cardList.add(card3);
 
-        grid.gridArray[1][1].add(card1);
-        grid.gridArray[3][2].add(card2);
-        grid.gridArray[3][6].add(card3);
+       //grid.gridArray[spawningSlotX][spawningSlotY].add(card1);
+       //grid.gridArray[3][2].add(card2);
+       //grid.gridArray[3][6].add(card3);
 
         for (Card card : cardList) {
+            grid.gridArray[spawningSlotX][spawningSlotY].add(card);
             card.colorCard();
             card.setDefaultValues();
             card.initialGridSnap();
