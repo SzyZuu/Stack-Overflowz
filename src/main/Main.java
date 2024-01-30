@@ -11,6 +11,10 @@ public class Main {
         window.setResizable(false);
         window.setTitle("Stack Overflowz");
         window.setLayout(new GridBagLayout());
+
+        Image icon = Toolkit.getDefaultToolkit().getImage("res/icon.png");
+        window.setIconImage(icon);
+
         GridBagConstraints c = new GridBagConstraints();
 
         GamePanel gamePanel = new GamePanel();              //initialize game panel
