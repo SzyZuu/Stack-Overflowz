@@ -21,13 +21,17 @@ public class Main {
 
         window.add(gamePanel, c);
 
-        JLabel tutorialLabel = new JLabel();
-        tutorialLabel.setBackground(new Color(27, 27, 27));
-        tutorialLabel.setText("<html>Short tutorial:<br>somethingsomethingsomethingsomethingsomethingsomethingsomething</html>");
+        JPanel tutorialPanel = new JPanel();
+        tutorialPanel.setBackground(Color.BLACK);
         c.gridwidth = 1;
         c.gridx = 4;
         c.gridy = 0;
-        window.add(tutorialLabel, c);
+        window.add(tutorialPanel, c);
+
+        JLabel tutorialLabel = new JLabel();
+        tutorialLabel.setText("<html>Short tutorial:<br>somethingsomethingsomethingsomethingsomethingsomethingsomething</html>");
+        tutorialPanel.add(tutorialLabel);
+
 
         window.pack(); // causes window to be preferred size and layout
         window.setLocationRelativeTo(null);
