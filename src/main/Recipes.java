@@ -16,7 +16,7 @@ public class Recipes {
 
     int currentlyUsedCardIds = 9;
     int calcCardIds = currentlyUsedCardIds +1;                  // +1, cos otherwise it'll break
-    int recipe[][] = new int[calcCardIds][calcCardIds];         //for now always set to the highest ID
+    int[][] recipe = new int[calcCardIds][calcCardIds];         //for now always set to the highest ID
 
     public void readRecipes() {
         for(int i = 0; i < calcCardIds; i++){                    //default to zero
