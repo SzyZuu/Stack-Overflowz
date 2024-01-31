@@ -13,41 +13,41 @@ public class CraftingHandler implements CraftingListener{
                 //spawn the card; spawning method needed
                 switch (r.recipe[card1.id][card2.id]){
                     case 2:     // result Id, chop Wood
-                        gp.spawnNewCard(2);
+                        gp.spawnNewCard(r.recipe[card1.id][card2.id]);
                         gp.returnCards(card2);
                         gp.returnCards(card1);
                         break;
                     case 3:     // mine boulder
                         gp.returnCards(card2);
                         gp.returnCards(card1);
-                        gp.spawnNewCard(3);
+                        gp.spawnNewCard(r.recipe[card1.id][card2.id]);
                         break;
                     case 6:     // refine Wood
-                        gp.spawnNewCard(6);
+                        gp.spawnNewCard(r.recipe[card1.id][card2.id]);
                         gp.deleteCard(card2);
                         gp.returnCards(card1);
                         gp.score += gp.newestCard.scoreValue;
                         break;
                     case 7:     //refine Stone
-                        gp.spawnNewCard(7);
+                        gp.spawnNewCard(r.recipe[card1.id][card2.id]);
                         gp.deleteCard(card2);
                         gp.returnCards(card1);
                         gp.score += gp.newestCard.scoreValue; // scorevalues are in card
                         break;
                     case 8:     //make housing material
-                        gp.spawnNewCard(8);
+                        gp.spawnNewCard(r.recipe[card1.id][card2.id]);
                         gp.deleteCard(card2);
                         gp.deleteCard(card1);
                         gp.score += gp.newestCard.scoreValue;
                         break;
                     case 9:     //make house
-                        gp.spawnNewCard(9);
+                        gp.spawnNewCard(r.recipe[card1.id][card2.id]);
                         gp.deleteCard(card2);
                         gp.returnCards(card1);
                         gp.score += gp.newestCard.scoreValue;
                         break;
                     case 10:    //villager duplication
-                        gp.spawnNewCard(10);
+                        gp.spawnNewCard(r.recipe[card1.id][card2.id]);
                         gp.spawnNewCard(1);
                         gp.deleteCard(card2);
                         gp.returnCards(card1);
